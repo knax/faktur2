@@ -49,3 +49,10 @@ $jenisKonsumen.click(function(){
 });
 Faktur.makeTableRowClickable();
 Faktur.setInputDateToToday();
+
+var $activeNav = $('ul.nav > li').find('a[href$="' + document.location.pathname + '"]');
+$activeNav.parent().addClass('active');
+
+if($activeNav.parent().parent().hasClass('dropdown-menu')) {
+    $activeNav.parent().parent().parent().addClass('active');
+}
