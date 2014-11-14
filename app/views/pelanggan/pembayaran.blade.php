@@ -2,7 +2,14 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
-        <h2>Pembayaran Piutang pelanggan Hasta Ragil</h2>
+        <h2>Piutang pelanggan Hasta Ragil</h2>
+    </div>
+</div>
+<hr/>
+<div class="row">
+    <div class="col-md-12">
+        <label for="keterangan">Keterangan:</label>
+        <p class="form-control-static" id="keterangan">{{$pelanggan->keterangan}}</p>
     </div>
 </div>
 <hr/>
@@ -16,7 +23,7 @@
             </div>
         </div>
         <p class="bg-info notification">
-            <strong>Banyaknya piutang</strong> : Rp. 500,000.-
+            <strong>Banyaknya piutang</strong> : {{toRupiah($pelanggan->piutang)}}
         </p>
         <div class="form-group">
             <label for="metode-pembayaran">Metode Pembayaran</label>

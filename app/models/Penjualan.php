@@ -1,9 +1,9 @@
 <?php
 
-class Pembelian extends Model
+class Penjualan extends Model
 {
 
-    protected $table = 'pembelian';
+    protected $table = 'penjualan';
     protected $guarded = ['id'];
 
     public static function belumDibayar()
@@ -16,16 +16,16 @@ class Pembelian extends Model
         return $this->belongsTo('Pelanggan', 'id_pelanggan', 'id')->first();
     }
 
-    public function listBarangTerbeli()
+    public function listBarangTerjual()
     {
-        return $this->hasMany('PembelianDetail', 'id_pembelian', 'id')->get();
+        return $this->hasMany('PenjualanDetail', 'id_penjualan', 'id')->get();
     }
 
     public function totalHarga()
     {
         $totalHarga = 0;
-        foreach ($this->listBarangTerbeli() as $pembelianDetail) {
-            $totalHarga += $pembelianDetail->unit * $pembelianDetail->harga;
+        foreach ($this->listBarangTerjual() as $penjualanDetail) {
+            $totalHarga += $penjualanDetail->unit * $penjualanDetail->harga;
         }
 
         return $totalHarga;

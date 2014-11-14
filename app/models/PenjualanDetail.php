@@ -1,7 +1,7 @@
 <?php
 
-class PembelianDetail extends Model {
-    protected $table = 'pembelian_detail';
+class PenjualanDetail extends Model {
+    protected $table = 'penjualan_detail';
     protected $guarded = ['id'];
 
     public function barang(){

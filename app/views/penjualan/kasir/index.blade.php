@@ -11,11 +11,11 @@
                 <th>Harga Total</th>
             </thead>
             <tbody>
-                @foreach($daftarPembelian as $pembelian)
-                <tr data-id="{{$pembelian->id}}">
-                    <td>{{$pembelian->id}}</td>
-                    <td>{{$pembelian->pelanggan()->nama}}</td>
-                    <td>{{$pembelian->totalHarga()}}</td>
+                @foreach($daftarPenjualan as $penjualan)
+                <tr data-id="{{$penjualan->id}}">
+                    <td>{{$penjualan->id}}</td>
+                    <td>{{$penjualan->pelanggan()->nama}}</td>
+                    <td>{{$penjualan->totalHarga()}}</td>
                 </tr>
                 @endforeach
             </tbody>

@@ -15,24 +15,14 @@
                 <th>Piutang</th>
             </thead>
             <tbody>
-                <tr>
-                    <td>Hasta Ragil</td>
-                    <td>Jambu Air I No 16 Kota Baru Bekasi Barat</td>
-                    <td>00829312312</td>
-                    <td>0</td>
+                @foreach($listPelanggan as $pelanggan)
+                <tr data-id="{{$pelanggan->id}}">
+                    <td>{{$pelanggan->nama}}</td>
+                    <td>{{$pelanggan->alamat}}</td>
+                    <td>{{$pelanggan->nomor_telepon}}</td>
+                    <td>{{$pelanggan->piutang}}</td>
                 </tr>
-                <tr>
-                    <td>Astuti</td>
-                    <td>bla bla</td>
-                    <td>00829312312</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>Bima Setyo</td>
-                    <td>bla bla</td>
-                    <td>00829312312</td>
-                    <td>4000</td>
-                </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

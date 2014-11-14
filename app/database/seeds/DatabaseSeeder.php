@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call('BarangTableSeeder');
         $this->call('PelangganTableSeeder');
-        $this->call('PembelianTableSeeder');
+        $this->call('PenjualanTableSeeder');
     }
 
 }

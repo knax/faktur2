@@ -2,7 +2,7 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
-        <h2>Nomor Faktur {{$pembelian->id}}</h2>
+        <h2>Nomor Faktur {{$penjualan->id}}</h2>
     </div>
 </div>
 <hr/>
@@ -10,7 +10,7 @@
     <div class="col-md-12">
         <div class="form-group">
             <label for="nama-konsumen">Nama Konsumen</label>
-            <p id="nama-konsumen" class="form-control-static">{{$pembelian->pelanggan()->nama}}</p>
+            <p id="nama-konsumen" class="form-control-static">{{$penjualan->pelanggan()->nama}}</p>
         </div>
     </div>
 </div>
@@ -34,17 +34,17 @@
             <tfoot>
             <tr>
                 <td colspan="4" class="text-right"><strong>Total Harga :</strong></td>
-                <td>{{toRupiah($pembelian->totalHarga())}}</td>
+                <td>{{toRupiah($penjualan->totalHarga())}}</td>
             </tr>
             </tfoot>
             <tbody>
-                @foreach($pembelian->listBarangTerbeli() as $key => $pembelianDetail)
+                @foreach($penjualan->listBarangTerjual() as $key => $penjualanDetail)
                 <tr>
                     <td>{{$key + 1}}</td>
-                    <td>{{$pembelianDetail->barang()->nama}}</td>
-                    <td>{{toRupiah($pembelianDetail->harga)}}</td>
-                    <td>{{$pembelianDetail->unit}}</td>
-                    <td>{{toRupiah($pembelianDetail->harga * $pembelianDetail->unit)}}</td>
+                    <td>{{$penjualanDetail->barang()->nama}}</td>
+                    <td>{{toRupiah($penjualanDetail->harga)}}</td>
+                    <td>{{$penjualanDetail->unit}}</td>
+                    <td>{{toRupiah($penjualanDetail->harga * $penjualanDetail->unit)}}</td>
                 </tr>
                 @endforeach
             </tbody>
@@ -60,7 +60,7 @@
 <hr/>
 <div class="row">
     <div class="col-md-12">
-    <form action="/penjualan/kasir/{{$pembelian->id}}" method="POST">
+    <form action="/penjualan/kasir/{{$penjualan->id}}" method="POST">
         <div class="radio">
             <label>
                 <input type="radio" name="metode_pembayaran" id="tunai" value="tunai" checked>
@@ -79,7 +79,7 @@
                 Merchant
             </label>
         </div>
-        @if($pembelian->bukanPelangganTetap())
+        @if($penjualan->bukanPelangganTetap())
         <div class="radio">
             <label>
                 <input type="radio" name="metode_pembayaran" id="hutang" value="hutang">

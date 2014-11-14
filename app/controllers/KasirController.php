@@ -3,27 +3,27 @@
 class KasirController extends \BaseController
 {
 
-    public function daftarPembelianBelumDibayar()
+    public function daftarPenjualanBelumDibayar()
     {
-        $daftarPembelian = Pembelian::belumDibayar();
+        $daftarPenjualan = Penjualan::belumDibayar();
 
-        return View::make('penjualan/kasir/index', ['daftarPembelian' => $daftarPembelian]);
+        return View::make('penjualan/kasir/index', ['daftarPenjualan' => $daftarPenjualan]);
     }
 
     public function bayarForm($id)
     {
-        $pembelian = Pembelian::findOrFail($id);
+        $penjualan = Penjualan::findOrFail($id);
 
-        return View::make('penjualan/kasir/pembayaran', ['pembelian' => $pembelian]);
+        return View::make('penjualan/kasir/pembayaran', ['penjualan' => $penjualan]);
     }
 
     public function bayar($id)
     {
-        $pembelian = Pembelian::findOrFail($id);
+        $penjualan = Penjualan::findOrFail($id);
 
-        $pembelian->sudah_dibayar = true;
+        $penjualan->sudah_dibayar = true;
 
-        $pembelian->save();
+        $penjualan->save();
 
         return Redirect::to('/penjualan/kasir');
     }

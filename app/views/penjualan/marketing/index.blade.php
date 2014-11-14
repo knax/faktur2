@@ -1,8 +1,8 @@
 @extends('layout.main')
 @section('content')
+        <form role="form" action="/penjualan/marketing" method="POST">
 <div class="row">
     <div class="col-md-12">
-        <form role="form">
             <div class="form-group">
                 <div class="checkbox">
                     <label>
@@ -11,35 +11,26 @@
                 </div>
                 <div id="nama-konsumen">
                 <label for="nama-konsumen">Nama Konsumen</label>
-                <select class="form-control" name="nama_konsumen">
+                <select class="form-control" name="id_konsumen">
                     @foreach($listPelanggan as $pelanggan)
                     <option value="{{$pelanggan->id}}">{{$pelanggan->nama}}</option>
                     @endforeach
                 </select>
                 </div>
             </div>
-        </form>
     </div>
 </div>
 <hr/>
 <div class="row">
     <div class="col-md-12">
-        <form role="form">
             <div class="form-group">
                 <label for="barang">Nama Barang</label>
-                <select class="form-control data" name="nama_konsumen" id="barang">
+                <select class="form-control data" name="id_barang" id="barang">
                     @foreach($listBarang as $barang)
                     <option value="{{$barang->nama}}" data-stok="{{$barang->stok}}" data-range-harga="{{$barang->rangeHarga()}}" data-id="{{$barang->id}}">{{$barang->nama}}</option>
                     @endforeach
                 </select>
             </div>
-            <div class="form-group">
-                <label for="unit">Unit</label>
-                <input type="text" class="form-control data" name="unit" id="unit">
-            </div>
-            <p class="bg-info notification" class="hidden">
-                <strong>Stok tersisa</strong> <span id="stok-sisa"></span>
-            </p>
             <div class="form-group">
                 <label for="harga-satuan">Harga Satuan</label>
             <div class="input-group">
@@ -50,8 +41,15 @@
             <p class="bg-info notification">
             <strong>Range Harga</strong> <span id="range-harga"></span>
             </p>
+            <div class="form-group">
+                <label for="unit">Unit</label>
+                <input type="text" class="form-control data" name="unit" id="unit">
+            </div>
+            <p class="bg-info notification" class="hidden">
+                <strong>Stok tersisa</strong> <span id="stok-sisa"></span>
+            </p>
             <button type="submit" class="btn btn-default" id="tambah">Tambahkan Barang</button>
-        </form>
+
     </div>
 </div>
 <hr/>
@@ -74,8 +72,10 @@
             <tbody data-last-id="0">
             </tbody>
         </table>
-        <button type="submit" class="btn btn-default pull-right">Submit</button>
+        <button type="submit" class="btn btn-default pull-right" role="submit">Submit</button>
     </div>
 </div>
+
+        </form>
 <hr/>
 @stop

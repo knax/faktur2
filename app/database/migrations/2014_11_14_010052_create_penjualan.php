@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreatePembelian extends Migration
+class CreatePenjualan extends Migration
 {
 
     /**
@@ -13,7 +13,7 @@ class CreatePembelian extends Migration
      */
     public function up()
     {
-        Schema::create('pembelian', function (Blueprint $table) {
+        Schema::create('penjualan', function (Blueprint $table) {
             $table->increments('id');
             $table->date('tanggal');
             $table->boolean('sudah_dibayar');
@@ -29,7 +29,7 @@ class CreatePembelian extends Migration
      */
     public function down()
     {
-        Schema::drop('pembelian');
+        Schema::drop('penjualan');
     }
 
 }

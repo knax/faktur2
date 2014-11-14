@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreatePembelianDetail extends Migration {
+class CreatePenjualanDetail extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,14 +12,14 @@ class CreatePembelianDetail extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('pembelian_detail', function(Blueprint $table)
+		Schema::create('penjualan_detail', function(Blueprint $table)
 		{
             $table->increments('id');
 			$table->bigInteger('harga')->unsigned();
             $table->integer('unit')->unsigned();
-            $table->integer('id_pembelian')->unsigned();
+            $table->integer('id_penjualan')->unsigned();
             $table->integer('id_barang')->unsigned();
-            $table->foreign('id_pembelian')->references('id')->on('pembelian');
+            $table->foreign('id_penjualan')->references('id')->on('penjualan');
             $table->foreign('id_barang')->references('id')->on('barang');
 		});
 	}
@@ -32,7 +32,7 @@ class CreatePembelianDetail extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('pembelian_detail');
+		Schema::drop('penjualan_detail');
 	}
 
 }

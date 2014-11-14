@@ -10,9 +10,14 @@ var Faktur = {
             var $input = $('<input/>');
 
             $input.attr('hidden', '1');
-            $input.attr('value', $(this).val());
+            if($(this).is('select')) {
+                $input.attr('value', $(this).find(':selected').data('id'));
+            } else {
+                $input.attr('value', $(this).val());
+            }
             $input.attr('name', 'barang[' + id + '][' + $(this).attr('name') + ']');
 
+            console.log($(this));
             $cell.html($(this).val());
             $cell.append($input);
             $(this).val('');

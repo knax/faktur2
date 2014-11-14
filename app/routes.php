@@ -28,19 +28,16 @@ Route::group(['prefix' => 'stok'], function () {
 });
 Route::group(['prefix' => 'penjualan'], function () {
     Route::group(['prefix' => 'kasir'], function () {
-        Route::get('', 'KasirController@daftarPembelianBelumDibayar');
+        Route::get('', 'KasirController@daftarPenjualanBelumDibayar');
         Route::get('{id}', 'KasirController@bayarForm');
         Route::post('{id}', 'KasirController@bayar');
     });
-    Route::get('marketing', 'MarketingController@beliBarangForm');
+    Route::get('marketing', 'MarketingController@jualBarangForm');
+    Route::post('marketing', 'MarketingController@jualBarang');
 });
 Route::group(['prefix' => 'pelanggan'], function () {
-    Route::get('', function () {
-        return View::make('pelanggan/index');
-    });
-    Route::get('{id}', function () {
-        return View::make('pelanggan/pembayaran');
-    });
+    Route::get('', 'PelangganController@listPelanggan');
+    Route::get('{id}', 'PelangganController@pembayaranForm');
 });
 Route::group(['prefix' => 'keuntungan'], function () {
     Route::get('barang_terjual', function () {
