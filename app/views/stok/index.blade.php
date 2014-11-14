@@ -7,24 +7,26 @@
             <thead>
                 <th>Kode Barang</th>
                 <th>Nama Barang</th>
+                <th>Harga Barang</th>
                 <th>Sisa Stok</th>
+                <th>Harga Stok</th>
             </thead>
+            <tfoot>
+                <tr>
+                    <td class="text-right" colspan="4"><strong>Total Harga Stok</strong></td>
+                    <td>{{toRupiah($totalHargaStok)}}</td>
+                </tr>
+            </tfoot>
             <tbody>
+                @foreach ($barang as $baris)
                 <tr>
-                    <td>1</td>
-                    <td>Besi</td>
-                    <td>122</td>
+                    <td>{{$baris->id}}</td>
+                    <td>{{$baris->nama}}</td>
+                    <td>{{toRupiah($baris->harga)}}</td>
+                    <td>{{$baris->stok}}</td>
+                    <td>{{toRupiah($baris->harga * $baris->stok)}}</td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Kayu</td>
-                    <td>133</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Atap</td>
-                    <td>443</td>
-                </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

@@ -12,9 +12,9 @@
                 <div id="nama-konsumen">
                 <label for="nama-konsumen">Nama Konsumen</label>
                 <select class="form-control" name="nama_konsumen">
-                    <option>Hasta Ragil | 08979400191 </option>
-                    <option>Astuti | 08979400191 </option>
-                    <option>Bima | 08979400191 </option>
+                    @foreach($listPelanggan as $pelanggan)
+                    <option value="{{$pelanggan->id}}">{{$pelanggan->nama}}</option>
+                    @endforeach
                 </select>
                 </div>
             </div>
@@ -28,17 +28,17 @@
             <div class="form-group">
                 <label for="barang">Nama Barang</label>
                 <select class="form-control data" name="nama_konsumen" id="barang">
-                    <option value="Besi">Besi</option>
-                    <option value="Kayu">Kayu</option>
-                    <option value="Atap">Atap</option>
+                    @foreach($listBarang as $barang)
+                    <option value="{{$barang->nama}}" data-stok="{{$barang->stok}}" data-range-harga="{{$barang->rangeHarga()}}" data-id="{{$barang->id}}">{{$barang->nama}}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="form-group">
                 <label for="unit">Unit</label>
                 <input type="text" class="form-control data" name="unit" id="unit">
             </div>
-            <p class="bg-info notification">
-                <strong>Stok tersisa</strong> 700
+            <p class="bg-info notification" class="hidden">
+                <strong>Stok tersisa</strong> <span id="stok-sisa"></span>
             </p>
             <div class="form-group">
                 <label for="harga-satuan">Harga Satuan</label>
@@ -48,7 +48,7 @@
                 </div>
             </div>
             <p class="bg-info notification">
-            <strong>Range Harga</strong> 7300-7400
+            <strong>Range Harga</strong> <span id="range-harga"></span>
             </p>
             <button type="submit" class="btn btn-default" id="tambah">Tambahkan Barang</button>
         </form>
@@ -68,24 +68,10 @@
             <tfoot>
             <tr>
                 <td colspan="4" class="text-right"><strong>Total Harga :</strong></td>
-                <td id="total-harga-barang">2000</td>
+                <td id="total-harga-barang">Rp. 0,-</td>
             </tr>
             </tfoot>
-            <tbody data-last-id="2">
-                <tr>
-                    <td>1</td>
-                    <td>Besi</td>
-                    <td>7300</td>
-                    <td>100</td>
-                    <td class="harga-barang">730000</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Kayu</td>
-                    <td>9000</td>
-                    <td>10</td>
-                    <td class="harga-barang">90000</td>
-                </tr>
+            <tbody data-last-id="0">
             </tbody>
         </table>
         <button type="submit" class="btn btn-default pull-right">Submit</button>

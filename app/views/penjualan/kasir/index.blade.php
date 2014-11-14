@@ -11,16 +11,13 @@
                 <th>Harga Total</th>
             </thead>
             <tbody>
-                <tr data-id="231">
-                    <td>231</td>
-                    <td>Hasta Ragil</td>
-                    <td>231231</td>
+                @foreach($daftarPembelian as $pembelian)
+                <tr data-id="{{$pembelian->id}}">
+                    <td>{{$pembelian->id}}</td>
+                    <td>{{$pembelian->pelanggan()->nama}}</td>
+                    <td>{{$pembelian->totalHarga()}}</td>
                 </tr>
-                <tr data-id="231">
-                    <td>2311</td>
-                    <td>Astuti</td>
-                    <td>9002310</td>
-                </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

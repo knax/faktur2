@@ -79,3 +79,8 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+
+
+function toRupiah($number) {
+    return 'Rp. ' . number_format( $number, 0 , '' , '.' ) . ',-';
+}

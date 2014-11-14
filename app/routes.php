@@ -17,32 +17,22 @@ Route::get('', function () {
 
 Route::group(['prefix' => 'stok'], function () {
     Route::group(['prefix' => 'barang'], function () {
-        Route::get('', function () {
-            return View::make('stok/barang/index');
-        });
-        Route::get('tambah', function () {
-            return View::make('stok/barang/tambah');
-        });
-        Route::get('{id}/edit', function() {
-            return View::make('stok/barang/edit');
-        });
+        Route::get('', 'BarangController@barang');
+        Route::post('', 'BarangController@buatBarang');
+        Route::get('tambah', 'BarangController@buatBarangForm');
+        Route::get('{id}', 'BarangController@detail');
+        Route::post('{id}', 'BarangController@editBarang');
+        Route::get('{id}/edit', 'BarangController@editBarangForm');
     });
-    Route::get('', function () {
-        return View::make('stok/index');
-    });
+    Route::get('', 'BarangController@index');
 });
 Route::group(['prefix' => 'penjualan'], function () {
     Route::group(['prefix' => 'kasir'], function () {
-        Route::get('', function () {
-            return View::make('penjualan/kasir/index');
-        });
-        Route::get('{id}', function() {
-            return View::make('penjualan/kasir/pembayaran');
-        });
+        Route::get('', 'KasirController@daftarPembelianBelumDibayar');
+        Route::get('{id}', 'KasirController@bayarForm');
+        Route::post('{id}', 'KasirController@bayar');
     });
-    Route::get('marketing', function () {
-        return View::make('penjualan/marketing/index');
-    });
+    Route::get('marketing', 'MarketingController@beliBarangForm');
 });
 Route::group(['prefix' => 'pelanggan'], function () {
     Route::get('', function () {
