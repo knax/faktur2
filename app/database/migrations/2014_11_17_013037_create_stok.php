@@ -15,7 +15,10 @@ class CreateStok extends Migration {
 		Schema::create('stok', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->timestamps();
+            $table->integer('id_barang')->unsigned();
+            $table->integer('stok')->unsigned();
+            $table->date('tanggal');
+            $table->foreign('id_barang')->references('id')->on('barang');
 		});
 	}
 

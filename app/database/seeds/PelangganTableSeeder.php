@@ -22,10 +22,15 @@ class PelangganTableSeeder extends Seeder
                 'nama'          => $faker->name,
                 'alamat'        => $faker->address,
                 'nomor_telepon' => $faker->phoneNumber,
-                'piutang'       => ($index - 1) . '00000',
                 'keterangan'    => $faker->sentence()
             ]);
+            Piutang::create([
+                'id_pelanggan' => $index,
+                'sisa_piutang' => ($index - 1) . '00000',
+                'tanggal'      => (new DateTime())->format('Y-m-d')
+            ]);
         }
+
     }
 
 }

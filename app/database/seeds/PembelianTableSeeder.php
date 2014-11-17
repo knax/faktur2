@@ -12,7 +12,7 @@ class PembelianTableSeeder extends Seeder
 
         foreach (range(1, 10) as $index) {
             $metodePembayaran = $faker->randomElement(['tunai', 'transfer', 'merchant', 'hutang']);
-            $tanggalPembelian = (new DateTime())->modify('-' . ($index + 1) . ' days')->format('Y-m-d');
+            $tanggalPembelian = (new DateTime())->format('Y-m-d');
             Pembelian::create([
                 'nama_supplier'     => $faker->company,
                 'metode_pembayaran' => $metodePembayaran,

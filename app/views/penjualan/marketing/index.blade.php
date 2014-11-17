@@ -27,7 +27,7 @@
         <label for="barang">Nama Barang</label>
         <select class="form-control data" name="id_barang" id="barang">
           @foreach($listBarang as $barang)
-          <option value="{{$barang->nama}}" data-stok="{{$barang->stok}}" data-range-harga="{{$barang->rangeHarga()}}"
+          <option value="{{$barang->nama}}" data-stok="{{$barang->stok()->stok}}" data-range-harga="{{$barang->rangeHarga()}}"
                   data-id="{{$barang->id}}">{{$barang->nama}}
           </option>
           @endforeach

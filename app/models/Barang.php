@@ -44,4 +44,62 @@ class Barang extends Model
 
         return $listTerjual;
     }
+
+    public function tambahStok($banyaknya)
+    {
+        $stok = $this->stok((new DateTime())->format('Y-m-d'));
+
+        if( is_null($stok) ) {
+            $stok = new Stok();
+            $stok->tanggal = (new DateTime())->format('Y-m-d');
+            $stok->stok = $this->stok((new DateTime())->modify('-1 days')->format('Y-m-d'));
+            $stok->id_barang = $this->id;
+            $stok->save();
+        }
+
+        $stok->stok = $stok->stok + $banyaknya;
+
+        $stok->save();
+
+        $stokPerpindahan = new StokPerpindahan();
+
+        $stokPerpindahan->id_stok = $stok->id;
+        $stokPerpindahan->unit = $banyaknya;
+
+        $stokPerpindahan->save();
+    }
+
+    public function kurangiStok($banyaknya)
+    {
+        $stok = $this->stok((new DateTime())->format('Y-m-d'));
+
+        if( is_null($stok) ) {
+            $stok = new Stok();
+            $stok->tanggal = (new DateTime())->format('Y-m-d');
+            $stok->stok = $this->stok((new DateTime())->modify('-1 days')->format('Y-m-d'));
+            $stok->id_barang = $this->id;
+            $stok->save();
+        }
+
+        $stok->stok = $stok->stok - $banyaknya;
+
+        $stok->save();
+
+        $stokPerpindahan = new StokPerpindahan();
+
+        $stokPerpindahan->id_stok = $stok->id;
+        $stokPerpindahan->unit = 0 - $banyaknya;
+
+        $stokPerpindahan->save();
+    }
+
+    public function stok($tanggal = null)
+    {
+        if( is_null($tanggal) ) {
+            $tanggal = (new DateTime())->format('Y-m-d');
+        }
+
+        return $this->hasMany('Stok', 'id_barang', 'id')->where('tanggal', '=', $tanggal)->first();
+
+    }
 }

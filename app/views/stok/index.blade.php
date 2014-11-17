@@ -23,8 +23,8 @@
         <td>{{$baris->id}}</td>
         <td>{{$baris->nama}}</td>
         <td>{{toRupiah($baris->harga)}}</td>
-        <td>{{$baris->stok}}</td>
-        <td>{{toRupiah($baris->harga * $baris->stok)}}</td>
+        <td>{{$baris->stok()->stok}}</td>
+        <td>{{toRupiah($baris->harga * $baris->stok()->stok)}}</td>
       </tr>
       @endforeach
       </tbody>

@@ -16,15 +16,15 @@ class PembelianController extends \BaseController
 
         $pembelian = new Pembelian();
         $pembelian->nama_supplier = Input::get('nama');
-        $pembelian->jatuh_tempo = $tanggalJatuhTempo;
         $pembelian->metode_pembayaran = Input::get('metode_pembayaran');
+        $pembelian->tanggal_pembelian = (new DateTime())->format('Y-m-d');
         $pembelian->save();
 
         $listBarang = Input::get('barang');
 
         foreach ($listBarang as $barang) {
             $barangDijual = Barang::findOrFail($barang['id_barang'])->first();
-            $barangDijual->stok = $barangDijual->stok + $barang['unit'];
+            $barangDijual->tambahStok($barang['unit']);
             $barangDijual->save();
 
             $pembelianDetail = new PembelianDetail();
@@ -32,6 +32,14 @@ class PembelianController extends \BaseController
             $pembelianDetail->id_barang = $barangDijual->id;
             $pembelianDetail->unit = $barang['unit'];
             $pembelianDetail->save();
+        }
+
+        if(Input::get('metode_pembayaran') == 'hutang') {
+            $hutang = new Hutang();
+            $hutang->id_pembelian = $pembelian->id;
+            $hutang->jatuh_tempo = $tanggalJatuhTempo;
+            $hutang->sisa_hutang = Input::get('total_harga');
+            $hutang->save();
         }
 
         return Redirect::to('/');

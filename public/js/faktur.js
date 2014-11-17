@@ -74,6 +74,7 @@ var Faktur = {
             totalHarga = totalHarga + Math.floor($(this).html().replace(/[^\/\d]/g, ''));
         });
         $('td#total-harga-barang').html(Faktur.toRupiah(totalHarga));
+        $('input#total-harga').val(totalHarga);
 
     },
     makeTableRowClickable: function () {

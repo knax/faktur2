@@ -48,10 +48,10 @@
   <div class="row">
     <div class="col-md-12">
       <div class="form-group">
-        <label for="barang">Nama Barang</label>
+        <label for="barang-pembelian">Nama Barang</label>
         <select class="form-control data-pembelian" name="id_barang" id="barang-pembelian">
           @foreach($listBarang as $barang)
-          <option value="{{$barang->nama}}" data-stok="{{$barang->stok}}" data-harga="{{$barang->harga}}"
+          <option value="{{$barang->nama}}" data-stok="{{$barang->stok()->stok}}" data-harga="{{$barang->harga}}"
                   data-id="{{$barang->id}}">{{$barang->nama}}
           </option>
           @endforeach
@@ -63,7 +63,7 @@
       </p>
 
       <div class="form-group">
-        <label for="unit">Unit</label>
+        <label for="unit-pembelian">Unit</label>
         <input type="text" class="form-control data-pembelian" name="unit" id="unit-pembelian">
       </div>
       <button type="submit" class="btn btn-default" id="tambah-pembelian">Tambahkan Barang</button>
@@ -72,6 +72,7 @@
   <hr/>
   <div class="row">
     <div class="col-md-12">
+      <input type="text" name="total_harga" id="total-harga" hidden/>
       <table class="table table-bordered" id="data-pembelian">
         <thead>
         <th>Nomor</th>

@@ -32,9 +32,9 @@ class MarketingController extends \BaseController
         foreach ($listBarang as $barang) {
             $penjualanDetail = new PenjualanDetail();
 
-            $barangDijual = Barang::findOrFail($barang['id_barang'])->first();
+            $barangDijual = Barang::findOrFail($barang['id_barang']);
 
-            $barangDijual->stok = $barangDijual->stok - $barang['unit'];
+            $barangDijual->kurangiStok($barang['unit']);
 
             $barangDijual->save();
 

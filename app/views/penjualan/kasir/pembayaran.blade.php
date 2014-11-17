@@ -87,6 +87,11 @@
           Hutang
         </label>
       </div>
+
+      <div class="form-group">
+        <label for="jatuh-tempo">Jatuh Tempo (Hari)</label>
+        <input type="text" class="form-control data" name="jatuh_tempo" id="jatuh-tempo">
+      </div>
       @endif
       <button type="submit" class="btn btn-default pull-right">Submit</button>
     </form>

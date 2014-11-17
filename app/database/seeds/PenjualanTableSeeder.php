@@ -12,7 +12,7 @@ class PenjualanTableSeeder extends Seeder
 
         foreach (range(1, 10) as $index) {
             $sudahDibayar = $faker->boolean();
-            $tanggalPenjualan = (new DateTime())->modify('-' . ($index + 1) . ' days')->format('Y-m-d');
+            $tanggalPenjualan = (new DateTime())->format('Y-m-d');
             $tanggalPembayaran = null;
             if( $sudahDibayar ) {
                 $date = DateTime::createFromFormat('Y-m-d', $tanggalPenjualan);

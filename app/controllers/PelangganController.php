@@ -21,17 +21,7 @@ class PelangganController extends \BaseController
     {
         $pelanggan = Pelanggan::findOrFail($id);
 
-        $pembayaranHutang = new PembayaranPiutang();
-
-        $pembayaranHutang->jumlah = Input::get('pembayaran_piutang');
-        $pembayaranHutang->tanggal = (new DateTime)->format('Y-m-d');
-        $pembayaranHutang->metode = Input::get('metode_pembayaran');
-
-        $pembayaranHutang = $pelanggan->pembayaran()->save($pembayaranHutang);
-
-        $pelanggan->bayarHutang($pembayaranHutang->jumlah);
-
-        $pelanggan->save();
+        $pelanggan->bayarPiutang(Input::get('pembayaran_piutang'), Input::get('metode_pembayaran'));
 
         return Redirect::to('/');
     }

@@ -20,7 +20,7 @@
         <td>{{$pelanggan->nama}}</td>
         <td>{{$pelanggan->alamat}}</td>
         <td>{{$pelanggan->nomor_telepon}}</td>
-        <td>{{toRupiah($pelanggan->piutang)}}</td>
+        <td>{{toRupiah($pelanggan->piutang()->sisa_piutang)}}</td>
       </tr>
       @endforeach
       </tbody>

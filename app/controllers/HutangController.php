@@ -12,14 +12,14 @@ class HutangController extends \BaseController
 
     public function bayarHutangForm($id)
     {
-        $hutang = Hutang::findOrFail($id)->first();
+        $hutang = Hutang::findOrFail($id);
 
         return View::make('pembelian.hutang.pembayaran', ['hutang' => $hutang]);
     }
 
     public function bayarHutang($id)
     {
-        $hutang = Hutang::findOrFail($id)->first();
+        $hutang = Hutang::findOrFail($id);
 
         $pembayaranHutang = new PembayaranHutang();
 

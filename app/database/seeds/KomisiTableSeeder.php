@@ -14,7 +14,7 @@ class KomisiTableSeeder extends Seeder
             Komisi::create([
                 'tipe'    => $faker->randomElement(['tunai', 'transfer']),
                 'nominal' => $faker->numberBetween(10000, 100000),
-                'tanggal' => (new DateTime())->modify('-' . ($index + 1) . ' days')
+                'tanggal' => (new DateTime())->format('Y-m-d')
             ]);
         }
     }

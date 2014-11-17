@@ -26,7 +26,7 @@
         </div>
       </div>
       <p class="bg-info notification">
-        <strong>Banyaknya piutang</strong> : {{toRupiah($pelanggan->piutang)}}
+        <strong>Banyaknya piutang</strong> : {{toRupiah($pelanggan->piutang()->sisa_piutang)}}
       </p>
 
       <div class="form-group">

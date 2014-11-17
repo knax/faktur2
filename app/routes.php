@@ -63,5 +63,10 @@ Route::group(['prefix' => 'biaya'], function () {
     Route::post('komisi', 'BiayaController@buatKomisi');
 });
 Route::get('test', function(){
-   var_dump(Keuntungan::labaKotor());
+//   var_dump(Keuntungan::labaKotor());
+//    $barang = Barang::find(1)->first();
+//    $barang->tambahStok(7);
+    var_dump(Keuntungan::totalPenjualan());
+
+    var_dump(Keuntungan::totalPenjualanTambah());
 });

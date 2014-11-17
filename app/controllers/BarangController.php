@@ -10,7 +10,7 @@ class BarangController extends \BaseController
         $totalHargaStok = 0;
 
         foreach ($barang as $baris) {
-            $totalHargaStok = $totalHargaStok + ($baris->stok * $baris->harga);
+            $totalHargaStok = $totalHargaStok + ($baris->stok()->stok * $baris->harga);
         }
 
         return View::make('stok.index', ['barang' => $barang, 'totalHargaStok' => $totalHargaStok]);
@@ -30,7 +30,6 @@ class BarangController extends \BaseController
         $barang->harga = Input::get('harga_modal');
         $barang->batas_keuntungan_bawah = Input::get('batas_keuntungan_bawah');
         $barang->batas_keuntungan_atas = Input::get('batas_keuntungan_atas');
-        $barang->stok = 0;
 
         $barang->save();
 

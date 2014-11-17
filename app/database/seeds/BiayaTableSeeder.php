@@ -14,7 +14,7 @@ class BiayaTableSeeder extends Seeder
             Biaya::create([
                 'nominal'    => $faker->numberBetween(10000, 100000),
                 'keterangan' => $faker->text(),
-                'tanggal'    => (new DateTime())->modify('-' . $index - 1 . ' days')->format('Y-m-d')
+                'tanggal'    => (new DateTime())->format('Y-m-d')
             ]);
         }
     }

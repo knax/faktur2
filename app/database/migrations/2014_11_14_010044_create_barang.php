@@ -19,7 +19,6 @@ class CreateBarang extends Migration
             $table->bigInteger('harga')->unsigned();
             $table->string('batas_keuntungan_atas', 255);
             $table->string('batas_keuntungan_bawah', 255);
-            $table->integer('stok')->unsigned();
         });
     }
 

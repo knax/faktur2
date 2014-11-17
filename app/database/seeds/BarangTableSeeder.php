@@ -15,8 +15,13 @@ class BarangTableSeeder extends Seeder
                 'nama'                   => $faker->numerify('Besi ###'),
                 'harga'                  => $index . '000',
                 'batas_keuntungan_bawah' => $index + 3,
-                'batas_keuntungan_atas'  => $index + 5,
-                'stok'                   => $index . '00'
+                'batas_keuntungan_atas'  => $index + 5
+            ]);
+
+            Stok::create([
+                'id_barang' => $index,
+                'stok'      => $index . '00',
+                'tanggal'   => (new DateTime())->format('Y-m-d')
             ]);
         }
     }

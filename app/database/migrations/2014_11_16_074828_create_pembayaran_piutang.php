@@ -18,8 +18,8 @@ class CreatePembayaranPiutang extends Migration
             $table->bigInteger('jumlah')->unsigned();
             $table->string('metode', 255);
             $table->date('tanggal');
-            $table->integer('id_pelanggan')->unsigned();
-            $table->foreign('id_pelanggan')->references('id')->on('pelanggan');
+            $table->integer('id_piutang')->unsigned();
+            $table->foreign('id_piutang')->references('id')->on('piutang');
         });
     }
 
