@@ -8,7 +8,7 @@ class MarketingController extends \BaseController
         $listPelanggan = Pelanggan::where('id', '!=', '1')->get();
         $listBarang = Barang::all();
 
-        return View::make('penjualan/marketing/index',
+        return View::make('penjualan.marketing.index',
             ['listPelanggan' => $listPelanggan, 'listBarang' => $listBarang]);
     }
 
@@ -23,6 +23,7 @@ class MarketingController extends \BaseController
             $penjualan->id_pelanggan = Input::get('id_konsumen');
         }
         $penjualan->sudah_dibayar = false;
+        $penjualan->tanggal_penjualan = (new DateTime())->format('Y-m-d');
 
         $penjualan->save();
 

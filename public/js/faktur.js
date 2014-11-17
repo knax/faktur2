@@ -4,20 +4,20 @@ var Faktur = {
         var id = $tableBody.data('last-id') + 1;
         $tableBody.data('last-id', id);
         $row.append($('<td/>').html(id));
+
         var harga = Faktur.toRupiah($('input#harga-satuan').val() * $('input#unit').val());
         $inputs.each(function () {
             var $cell = $('<td/>');
             var $input = $('<input/>');
 
             $input.attr('hidden', '1');
-            if($(this).is('select')) {
+            if ($(this).is('select')) {
                 $input.attr('value', $(this).find(':selected').data('id'));
             } else {
                 $input.attr('value', $(this).val());
             }
             $input.attr('name', 'barang[' + id + '][' + $(this).attr('name') + ']');
 
-            console.log($(this));
             $cell.html($(this).val());
             $cell.append($input);
             $(this).val('');
@@ -27,9 +27,54 @@ var Faktur = {
         $row.appendTo($tableBody);
         var totalHarga = 0;
         $('td.harga-barang').each(function () {
-            totalHarga = totalHarga + Math.floor($(this).html().replace(/[^\/\d]/g,''));
+            totalHarga = totalHarga + Math.floor($(this).html().replace(/[^\/\d]/g, ''));
         });
         $('td#total-harga-barang').html(Faktur.toRupiah(totalHarga));
+    },
+    tambahDataKeTabelPembelian: function ($tableBody, $inputs) {
+
+        var $row = $('<tr/>');
+
+        var id = $tableBody.data('last-id') + 1;
+
+
+        $tableBody.data('last-id', id);
+        $row.append($('<td/>').html(id));
+
+        var hargaSatuan = $('select#barang-pembelian').find(':selected').data('harga');
+        var harga = Faktur.toRupiah(hargaSatuan * $('input#unit-pembelian').val());
+
+        $inputs.each(function () {
+            var $cell = $('<td/>');
+            var $input = $('<input/>');
+
+            $('span#harga-satuan').html(harga);
+
+            $input.attr('hidden', '1');
+            if ($(this).is('select')) {
+                $input.attr('value', $(this).find(':selected').data('id'));
+            } else {
+                $input.attr('value', $(this).val());
+            }
+            $input.attr('name', 'barang[' + id + '][' + $(this).attr('name') + ']');
+
+            $cell.html($(this).val());
+            $cell.append($input);
+            $(this).val('');
+            $cell.appendTo($row);
+        });
+        $row.append($('<td/>').html(hargaSatuan));
+        $row.append($('<td/>').addClass('harga-barang').html(harga));
+
+        $row.appendTo($tableBody);
+
+
+        var totalHarga = 0;
+        $('td.harga-barang').each(function () {
+            totalHarga = totalHarga + Math.floor($(this).html().replace(/[^\/\d]/g, ''));
+        });
+        $('td#total-harga-barang').html(Faktur.toRupiah(totalHarga));
+
     },
     makeTableRowClickable: function () {
         $.each($('table.table-clickable > tbody > tr'), function (index, value) {
@@ -45,25 +90,35 @@ var Faktur = {
             .val(moment()
                 .format('YYYY-MM-DD'));
     },
-    toRupiah: function (angka){
-        var rev     = parseInt(angka, 10).toString().split('').reverse().join('');
-        var rev2    = '';
-        for(var i = 0; i < rev.length; i++){
-            rev2  += rev[i];
-            if((i + 1) % 3 === 0 && i !== (rev.length - 1)){
+    toRupiah: function (angka) {
+        var rev = parseInt(angka, 10).toString().split('').reverse().join('');
+        var rev2 = '';
+        for (var i = 0; i < rev.length; i++) {
+            rev2 += rev[i];
+            if ((i + 1) % 3 === 0 && i !== (rev.length - 1)) {
                 rev2 += '.';
             }
         }
         return 'Rp. ' + rev2.split('').reverse().join('') + ',-';
     }
-}
+};
 
 var $tableBody = $('table#data > tbody');
 var $inputs = $('.data');
 $('button#tambah').click(function (e) {
     e.preventDefault();
     Faktur.tambahDataKeTabel($tableBody, $inputs);
+    $('span#stok-sisa').parent().addClass('hidden');
+    $('span#range-harga').parent().addClass('hidden');
 });
+
+var $tableBodyPembelian = $('table#data-pembelian > tbody');
+var $inputsPembelian = $('.data-pembelian');
+$('button#tambah-pembelian').click(function (e) {
+    e.preventDefault();
+    Faktur.tambahDataKeTabelPembelian($tableBodyPembelian, $inputsPembelian);
+});
+
 var $jenisKonsumen = $('input#jenis-konsumen');
 var $namaKonsumen = $('div#nama-konsumen');
 $namaKonsumen.toggle(false);
@@ -100,6 +155,17 @@ $selectBarang.change(function (e) {
     $spanStokSisa.parent().removeClass('hidden');
 });
 // End set stok barang
+
+// Tampilkan harga satuan
+
+var harga = $('select#barang-pembelian').find(':selected').data('harga');
+$('span#harga-satuan').html(harga);
+
+$('select#barang-pembelian').change(function (e) {
+    var harga = $('select#barang-pembelian').find(':selected').data('harga');
+    $('span#harga-satuan').html(harga);
+});
+// End tampilkan
 
 
 // Bikin navbar aktif sesuai link

@@ -16,11 +16,6 @@ class Penjualan extends Model
         return $this->belongsTo('Pelanggan', 'id_pelanggan', 'id')->first();
     }
 
-    public function listBarangTerjual()
-    {
-        return $this->hasMany('PenjualanDetail', 'id_penjualan', 'id')->get();
-    }
-
     public function totalHarga()
     {
         $totalHarga = 0;
@@ -31,8 +26,18 @@ class Penjualan extends Model
         return $totalHarga;
     }
 
+    public function listBarangTerjual()
+    {
+        return $this->hasMany('PenjualanDetail', 'id_penjualan', 'id')->get();
+    }
+
     public function bukanPelangganTetap()
     {
         return ($this->id_pelanggan != 1);
+    }
+
+    public function detail()
+    {
+        return $this->hasMany('PenjualanDetail', 'id_penjualan', 'id');
     }
 }

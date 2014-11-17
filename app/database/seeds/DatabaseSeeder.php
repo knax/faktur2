@@ -15,6 +15,10 @@ class DatabaseSeeder extends Seeder
         $this->call('BarangTableSeeder');
         $this->call('PelangganTableSeeder');
         $this->call('PenjualanTableSeeder');
+        $this->call('PembelianTableSeeder');
+        $this->call('BiayaTableSeeder');
+        $this->call('KomisiTableSeeder');
+        $this->call('KeuntunganTableSeeder');
     }
 
 }

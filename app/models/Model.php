@@ -1,5 +1,7 @@
 <?php
 
-class Model  extends \Eloquent {
+class Model extends \Eloquent
+{
+
     public $timestamps = false;
 }

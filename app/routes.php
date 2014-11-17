@@ -37,34 +37,31 @@ Route::group(['prefix' => 'penjualan'], function () {
 });
 Route::group(['prefix' => 'pelanggan'], function () {
     Route::get('', 'PelangganController@listPelanggan');
-    Route::get('{id}', 'PelangganController@pembayaranForm');
+    Route::get('{id}', 'PelangganController@bayarPiutangForm');
+    Route::post('{id}', 'PelangganController@bayarPiutang');
 });
 Route::group(['prefix' => 'keuntungan'], function () {
-    Route::get('barang_terjual', function () {
-        return View::make('keuntungan/barang_terjual/index');
-    });
+    Route::get('barang_terjual', 'KeuntunganController@barangTerjual');
+    Route::post('barang_terjual', 'KeuntunganController@barangTerjual');
     Route::get('', function () {
         return View::make('keuntungan/index');
     });
 });
 Route::group(['prefix' => 'pembelian'], function () {
-    Route::get('', function () {
-        return View::make('pembelian/index');
-    });
+    Route::get('', 'PembelianController@beliBarangForm');
+    Route::post('', 'PembelianController@beliBarang');
     Route::group(['prefix' => 'hutang'], function () {
-        Route::get('', function () {
-            return View::make('pembelian/hutang/index');
-        });
-        Route::get('{id}', function() {
-            return View::make('pembelian/hutang/pembayaran');
-        });
+        Route::get('', 'HutangController@listHutang');
+        Route::get('{id}', 'HutangController@bayarHutangForm');
+        Route::post('{id}', 'HutangController@bayarHutang');
     });
 });
 Route::group(['prefix' => 'biaya'], function () {
-    Route::get('', function () {
-        return View::make('biaya/index');
-    });
-    Route::get('komisi', function () {
-        return View::make('biaya/komisi/index');
-    });
+    Route::get('', 'BiayaController@index');
+    Route::post('', 'BiayaController@buatBiaya');
+    Route::get('komisi', 'BiayaController@buatKomisiForm');
+    Route::post('komisi', 'BiayaController@buatKomisi');
+});
+Route::get('test', function(){
+   var_dump(Keuntungan::labaKotor());
 });
