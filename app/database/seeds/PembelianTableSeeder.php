@@ -29,6 +29,7 @@ class PembelianTableSeeder extends Seeder
                 Hutang::create([
                     'jatuh_tempo'  => DateTime::createFromFormat('Y-m-d',
                         $tanggalPembelian)->modify('+10 days')->format('Y-m-d'),
+                    'tanggal'      => (new DateTime())->format('Y-m-d'),
                     'sisa_hutang'  => $faker->numberBetween(10000, 100000),
                     'id_pembelian' => $index
                 ]);

@@ -43,9 +43,7 @@ Route::group(['prefix' => 'pelanggan'], function () {
 Route::group(['prefix' => 'keuntungan'], function () {
     Route::get('barang_terjual', 'KeuntunganController@barangTerjual');
     Route::post('barang_terjual', 'KeuntunganController@barangTerjual');
-    Route::get('', function () {
-        return View::make('keuntungan/index');
-    });
+    Route::get('', 'KeuntunganController@index');
 });
 Route::group(['prefix' => 'pembelian'], function () {
     Route::get('', 'PembelianController@beliBarangForm');
@@ -61,12 +59,4 @@ Route::group(['prefix' => 'biaya'], function () {
     Route::post('', 'BiayaController@buatBiaya');
     Route::get('komisi', 'BiayaController@buatKomisiForm');
     Route::post('komisi', 'BiayaController@buatKomisi');
-});
-Route::get('test', function(){
-//   var_dump(Keuntungan::labaKotor());
-//    $barang = Barang::find(1)->first();
-//    $barang->tambahStok(7);
-    var_dump(Keuntungan::totalPenjualan());
-
-    var_dump(Keuntungan::totalPenjualanTambah());
 });

@@ -16,6 +16,7 @@ class CreateHutang extends Migration
         Schema::create('hutang', function (Blueprint $table) {
             $table->increments('id');
             $table->date('jatuh_tempo')->nullable();
+            $table->date('tanggal');
             $table->bigInteger('sisa_hutang')->unsigned();
             $table->integer('id_pembelian')->unsigned();
             $table->foreign('id_pembelian')->references('id')->on('pembelian');

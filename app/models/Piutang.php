@@ -16,18 +16,4 @@ class Piutang extends Model
         return $this->hasMany('PembayaranPiutang', 'id_piutang', 'id');
     }
 
-   /* public function bayarPiutang($banyaknya)
-    {
-        $this->sisa_piutang = $this->sisa_piutang - $banyaknya;
-    }*/
-/*
-    public function padaTanggal($tanggal = null)
-    {
-        if( is_null($tanggal) ) {
-            $tanggal = (new DateTime())->format('Y-m-d');
-        }
-
-        return $this->hasMany('Stok', 'id_barang', 'id')->where('tanggal', '=', $tanggal)->first();
-
-    }*/
 }

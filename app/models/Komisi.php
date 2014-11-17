@@ -17,4 +17,9 @@ class Komisi extends Model
 
         return $totalNominal;
     }
+
+    public static function komisiHariIni()
+    {
+        return Komisi::where('tanggal', '=', (new DateTime())->format('Y-m-d'))->get();
+    }
 }

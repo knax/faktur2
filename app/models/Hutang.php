@@ -20,4 +20,16 @@ class Hutang extends Model
     {
         $this->sisa_hutang = $this->sisa_hutang - $banyaknya;
     }
+
+    public function scopePadaTanggal($query, $tanggal)
+    {
+        if( is_null($tanggal) ) {
+            $tanggal = (new DateTime())->format('Y-m-d');
+        }
+
+        return $query->where('tanggal', '=', $tanggal);
+
+    }
+
+
 }
