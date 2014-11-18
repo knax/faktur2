@@ -22,19 +22,20 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="batas-keuntungan-atas">Batas Keuntungan Atas</label>
-
-        <div class="input-group">
-          <input type="text" id="batas-keuntungan-atas" name="batas_keuntungan_atas" class="form-control"/>
-
-          <div class="input-group-addon">%</div>
-        </div>
-      </div>
-      <div class="form-group">
         <label for="batas-keuntungan-bawah">Batas Keuntungan Bawah</label>
 
         <div class="input-group">
           <input type="text" id="batas-keuntungan-bawah" name="batas_keuntungan_bawah" class="form-control"/>
+
+          <div class="input-group-addon">%</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="batas-keuntungan-atas">Batas Keuntungan Atas</label>
+
+        <div class="input-group">
+          <input type="text" id="batas-keuntungan-atas" name="batas_keuntungan_atas" class="form-control"/>
 
           <div class="input-group-addon">%</div>
         </div>

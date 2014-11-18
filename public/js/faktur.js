@@ -150,6 +150,20 @@ var stokBarangTerpilih = $selectBarang.find(':selected').data('stok');
 $spanStokSisa.html(stokBarangTerpilih);
 $spanStokSisa.parent().removeClass('hidden');
 
+//$('input#unit').rules('add',{
+//   required: true
+//});
+
+//$('form#penjualan').validate({
+//        rules: {
+//            unit: {
+//                required: true,
+//                max: stokBarangTerpilih
+//            }
+//        }
+//    }
+//);
+
 $selectBarang.change(function (e) {
     stokBarangTerpilih = $('select#barang').find(':selected').data('stok');
     $spanStokSisa.html(stokBarangTerpilih);
@@ -177,3 +191,5 @@ if ($activeNav.parent().parent().hasClass('dropdown-menu')) {
     $activeNav.parent().parent().parent().addClass('active');
 }
 // End bikin navbar aktif
+
+

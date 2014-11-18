@@ -35,10 +35,10 @@ class KeuntunganController extends \BaseController
             'total_hutang_akhir'           => Keuntungan::totalHutangAkhir(),
             'pendapatan_lainnya_tunai'     => 0,
             'pendapatan_lainnya_transfer'  => 0,
-            'total_pendapatan_lain'     => 0,
+            'total_pendapatan_lain'        => 0,
             'pengeluaran_lainnya_tunai'    => Keuntungan::pengeluaranLainTunai(),
             'pengeluaran_lainnya_transfer' => Keuntungan::pengeluaranLainTransfer(),
-            'total_pengeluaran_lain'    => Keuntungan::pengeluaranLainTransfer(),
+            'total_pengeluaran_lain'       => Keuntungan::pengeluaranLainTransfer(),
             'setor_bank'                   => 0,
             'kas_akhir'                    => Keuntungan::kasAkhir(),
             'saldo_akhir'                  => Keuntungan::saldoAkhir()
