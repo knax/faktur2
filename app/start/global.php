@@ -90,3 +90,5 @@ function calculateDateDiffToNow($date)
 
     return $dateNow->diff($date)->days;
 }
+
+define('NORMAL_DATE', 'Y-m-d');

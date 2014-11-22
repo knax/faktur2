@@ -26,6 +26,7 @@ Route::group(['prefix' => 'stok'], function () {
     });
     Route::get('', 'BarangController@index');
 });
+
 Route::group(['prefix' => 'penjualan'], function () {
     Route::group(['prefix' => 'kasir'], function () {
         Route::get('', 'KasirController@daftarPenjualanBelumDibayar');
@@ -35,16 +36,19 @@ Route::group(['prefix' => 'penjualan'], function () {
     Route::get('marketing', 'MarketingController@jualBarangForm');
     Route::post('marketing', 'MarketingController@jualBarang');
 });
+
 Route::group(['prefix' => 'pelanggan'], function () {
     Route::get('', 'PelangganController@listPelanggan');
     Route::get('{id}', 'PelangganController@bayarPiutangForm');
     Route::post('{id}', 'PelangganController@bayarPiutang');
 });
+
 Route::group(['prefix' => 'keuntungan'], function () {
     Route::get('barang_terjual', 'KeuntunganController@barangTerjual');
     Route::post('barang_terjual', 'KeuntunganController@barangTerjual');
     Route::get('', 'KeuntunganController@index');
 });
+
 Route::group(['prefix' => 'pembelian'], function () {
     Route::get('', 'PembelianController@beliBarangForm');
     Route::post('', 'PembelianController@beliBarang');
@@ -54,9 +58,37 @@ Route::group(['prefix' => 'pembelian'], function () {
         Route::post('{id}', 'HutangController@bayarHutang');
     });
 });
+
 Route::group(['prefix' => 'biaya'], function () {
     Route::get('', 'BiayaController@index');
     Route::post('', 'BiayaController@buatBiaya');
     Route::get('komisi', 'BiayaController@buatKomisiForm');
     Route::post('komisi', 'BiayaController@buatKomisi');
+});
+
+Route::group(['prefix' => 'login'], function () {
+    Route::get('', 'LoginController@loginForm');
+    Route::post('', 'LoginController@login');
+});
+
+Route::group(['prefix' => 'karyawan'], function () {
+    Route::get('', 'KaryawanController@listKaryawan');
+    Route::group(['prefix' => 'absen'], function () {
+        Route::get('', 'KaryawanController@listAbsen');
+        Route::get('{id}/{tipe}', 'KaryawanController@absenKaryawan')
+             ->where('id', '[0-9]+')
+             ->where('tipe', '(masuk|setengah_hari|tidak)');
+    });
+    Route::get('absen', 'KaryawanController@listAbsen');
+    Route::get('lemburan', 'KaryawanController@listLemburan');
+    Route::get('{id}', 'KaryawanController@detailKaryawan');
+});
+
+Route::get('logout', 'LoginController@logout');
+
+Route::get('test', function () {
+    $listBarang = Barang::all();
+    foreach ($listBarang as $barang) {
+        var_dump($barang->stokTerakhir()->stok);
+    }
 });

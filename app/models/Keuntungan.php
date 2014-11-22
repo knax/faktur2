@@ -1,5 +1,18 @@
 <?php
 
+/**
+ * Keuntungan
+ *
+ * @property integer $id
+ * @property integer $kas
+ * @property integer $saldo_bank
+ * @property string $tanggal
+ * @method static \Illuminate\Database\Query\Builder|\Keuntungan whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Keuntungan whereKas($value)
+ * @method static \Illuminate\Database\Query\Builder|\Keuntungan whereSaldoBank($value)
+ * @method static \Illuminate\Database\Query\Builder|\Keuntungan whereTanggal($value)
+ * @method static \Model terakhir()
+ */
 class Keuntungan extends Model
 {
 

@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
-  <link rel="stylesheet" href="http://bootswatch.com/united/bootstrap.min.css"/>
-  <!--<link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>-->
+  <!--<link rel="stylesheet" href="http://bootswatch.com/united/bootstrap.min.css"/>-->
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="/css/bootstrapValidator.min.css"/>
   <link rel="stylesheet" href="/css/style.css"/>
 </head>
 <body>
@@ -83,7 +84,7 @@
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/js/moment.js"></script>
-<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/bootstrapValidator.min.js"></script>
 <script src="/js/faktur.js"></script>
 </body>
 </html>

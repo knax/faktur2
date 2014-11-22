@@ -20,9 +20,23 @@ class BarangTableSeeder extends Seeder
 
             Stok::create([
                 'id_barang' => $index,
-                'stok'      => $index . '00',
-                'tanggal'   => (new DateTime())->format('Y-m-d')
+                'stok'      => $index - 1 . '00',
+                'tanggal'   => (new DateTime())->modify('-2 days')->format(NORMAL_DATE)
             ]);
+
+            Stok::create([
+                'id_barang' => $index,
+                'stok'      => $index . '00',
+                'tanggal'   => (new DateTime())->modify('-1 days')->format(NORMAL_DATE)
+            ]);
+
+            Stok::create([
+                'id_barang' => $index,
+                'stok'      => $index + 1 . '00',
+                'tanggal'   => (new DateTime())->format(NORMAL_DATE)
+            ]);
+
+
         }
     }
 

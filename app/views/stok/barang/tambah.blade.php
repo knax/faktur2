@@ -40,6 +40,13 @@
           <div class="input-group-addon">%</div>
         </div>
       </div>
+
+      <div class="form-group">
+        <label for="batas-keuntungan-atas">Stok</label>
+
+          <input type="text" id="stok" name="stok" class="form-control"/>
+      </div>
+      </div>
       <button type="submit" class="btn btn-default pull-right">Submit</button>
     </form>
   </div>

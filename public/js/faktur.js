@@ -1,30 +1,22 @@
 var Faktur = {
+
     tambahDataKeTabel: function ($tableBody, $inputs) {
+
         var $row = $('<tr/>');
         var id = $tableBody.data('last-id') + 1;
+
         $tableBody.data('last-id', id);
         $row.append($('<td/>').html(id));
 
+
         var harga = Faktur.toRupiah($('input#harga-satuan').val() * $('input#unit').val());
-        $inputs.each(function () {
-            var $cell = $('<td/>');
-            var $input = $('<input/>');
 
-            $input.attr('hidden', '1');
-            if ($(this).is('select')) {
-                $input.attr('value', $(this).find(':selected').data('id'));
-            } else {
-                $input.attr('value', $(this).val());
-            }
-            $input.attr('name', 'barang[' + id + '][' + $(this).attr('name') + ']');
-
-            $cell.html($(this).val());
-            $cell.append($input);
-            $(this).val('');
-            $cell.appendTo($row);
-        });
         $row.append($('<td/>').addClass('harga-barang').html(harga));
+
         $row.appendTo($tableBody);
+
+        Faktur.inputToTable($inputs, $row, id);
+
         var totalHarga = 0;
         $('td.harga-barang').each(function () {
             totalHarga = totalHarga + Math.floor($(this).html().replace(/[^\/\d]/g, ''));
@@ -34,35 +26,18 @@ var Faktur = {
     tambahDataKeTabelPembelian: function ($tableBody, $inputs) {
 
         var $row = $('<tr/>');
-
         var id = $tableBody.data('last-id') + 1;
-
 
         $tableBody.data('last-id', id);
         $row.append($('<td/>').html(id));
 
+        Faktur.inputToTable($inputs, $row, id);
+
         var hargaSatuan = $('select#barang-pembelian').find(':selected').data('harga');
         var harga = Faktur.toRupiah(hargaSatuan * $('input#unit-pembelian').val());
 
-        $inputs.each(function () {
-            var $cell = $('<td/>');
-            var $input = $('<input/>');
+        $('span#harga-satuan').html(harga);
 
-            $('span#harga-satuan').html(harga);
-
-            $input.attr('hidden', '1');
-            if ($(this).is('select')) {
-                $input.attr('value', $(this).find(':selected').data('id'));
-            } else {
-                $input.attr('value', $(this).val());
-            }
-            $input.attr('name', 'barang[' + id + '][' + $(this).attr('name') + ']');
-
-            $cell.html($(this).val());
-            $cell.append($input);
-            $(this).val('');
-            $cell.appendTo($row);
-        });
         $row.append($('<td/>').html(hargaSatuan));
         $row.append($('<td/>').addClass('harga-barang').html(harga));
 
@@ -75,6 +50,28 @@ var Faktur = {
         });
         $('td#total-harga-barang').html(Faktur.toRupiah(totalHarga));
         $('input#total-harga').val(totalHarga);
+
+    },
+    inputToTable: function($inputs, $row, id) {
+        $inputs.each(function () {
+            var $cell = $('<td/>');
+            var $input = $('<input/>');
+
+            $input.attr('hidden', '1');
+
+            if ($(this).is('select')) {
+                $input.attr('value', $(this).find(':selected').data('id'));
+            } else {
+                $input.attr('value', $(this).val());
+            }
+
+            $input.attr('name', 'barang[' + id + '][' + $(this).attr('name') + ']');
+
+            $cell.html($(this).val());
+            $cell.append($input);
+            $(this).val('');
+            $cell.appendTo($row);
+        });
 
     },
     makeTableRowClickable: function () {
@@ -137,7 +134,12 @@ var hargaSatuanTerpilih = $selectBarang.find(':selected').data('range-harga');
 $spanRangeHarga.html(hargaSatuanTerpilih);
 $spanRangeHarga.parent().removeClass('hidden');
 
+$('input#harga-satuan').attr('min', $selectBarang.find(':selected').data('harga-bawah'));
+$('input#harga-satuan').attr('max', $selectBarang.find(':selected').data('harga-atas'));
+
 $selectBarang.change(function (e) {
+    $('input#harga-satuan').attr('min', $selectBarang.find(':selected').data('harga-bawah'));
+    $('input#harga-satuan').attr('max', $selectBarang.find(':selected').data('harga-atas'));
     hargaSatuanTerpilih = $selectBarang.find(':selected').data('range-harga');
     $spanRangeHarga.html(hargaSatuanTerpilih);
     $spanRangeHarga.parent().removeClass('hidden');
@@ -149,20 +151,7 @@ var $spanStokSisa = $('span#stok-sisa');
 var stokBarangTerpilih = $selectBarang.find(':selected').data('stok');
 $spanStokSisa.html(stokBarangTerpilih);
 $spanStokSisa.parent().removeClass('hidden');
-
-//$('input#unit').rules('add',{
-//   required: true
-//});
-
-//$('form#penjualan').validate({
-//        rules: {
-//            unit: {
-//                required: true,
-//                max: stokBarangTerpilih
-//            }
-//        }
-//    }
-//);
+$('input#unit').attr('max', stokBarangTerpilih);
 
 $selectBarang.change(function (e) {
     stokBarangTerpilih = $('select#barang').find(':selected').data('stok');
@@ -179,6 +168,8 @@ $('span#harga-satuan').html(harga);
 $('select#barang-pembelian').change(function (e) {
     var harga = $('select#barang-pembelian').find(':selected').data('harga');
     $('span#harga-satuan').html(harga);
+
+    $('form#form-marketing').bootstrapValidator('revalidateField', 'barang-pembelian');
 });
 // End tampilkan
 
@@ -193,3 +184,13 @@ if ($activeNav.parent().parent().hasClass('dropdown-menu')) {
 // End bikin navbar aktif
 
 
+//$('form#form-marketing').bootstrapValidator({
+//    fields: {
+//        unit: {
+//            validators: {
+//                value: $
+//            }
+//        }
+//
+//    }
+//});

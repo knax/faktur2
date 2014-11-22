@@ -1,5 +1,23 @@
 <?php
 
+/**
+ * Pelanggan
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\PembayaranPiutang[] $pembayaran
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Piutang[] $piutang
+ * @property integer $id
+ * @property string $nama
+ * @property string $alamat
+ * @property string $nomor_telepon
+ * @property string $keterangan
+ * @method static \Illuminate\Database\Query\Builder|\Pelanggan whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Pelanggan whereNama($value)
+ * @method static \Illuminate\Database\Query\Builder|\Pelanggan whereAlamat($value)
+ * @method static \Illuminate\Database\Query\Builder|\Pelanggan whereNomorTelepon($value)
+ * @method static \Illuminate\Database\Query\Builder|\Pelanggan wherePiutang($value)
+ * @method static \Illuminate\Database\Query\Builder|\Pelanggan whereKeterangan($value)
+ * @method static \Model terakhir()
+ */
 class Pelanggan extends Model
 {
 

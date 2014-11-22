@@ -5,15 +5,14 @@ class BarangController extends \BaseController
 
     public function index()
     {
-        $barang = Barang::all();
-
+        $listBarang = Barang::all();
         $totalHargaStok = 0;
 
-        foreach ($barang as $baris) {
-            $totalHargaStok = $totalHargaStok + ($baris->stok()->stok * $baris->harga);
+        foreach ($listBarang as $barang) {
+            $totalHargaStok = $totalHargaStok + ($barang->stokTerakhir()->stok * $barang->harga);
         }
 
-        return View::make('stok.index', ['barang' => $barang, 'totalHargaStok' => $totalHargaStok]);
+        return View::make('stok.index', ['listBarang' => $listBarang, 'totalHargaStok' => $totalHargaStok]);
     }
 
     public function barang()
@@ -26,12 +25,20 @@ class BarangController extends \BaseController
     public function buatBarang()
     {
         $barang = new Barang();
+
         $barang->nama = Input::get('nama_barang');
         $barang->harga = Input::get('harga_modal');
         $barang->batas_keuntungan_bawah = Input::get('batas_keuntungan_bawah');
         $barang->batas_keuntungan_atas = Input::get('batas_keuntungan_atas');
 
         $barang->save();
+
+        $stok = new Stok();
+
+        $stok->tanggal = (new DateTime())->format(NORMAL_DATE);
+        $stok->stok = Input::get('stok');
+
+        $barang->stok()->save($stok);
 
         return Redirect::to('/stok/barang');
     }

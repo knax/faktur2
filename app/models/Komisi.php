@@ -1,5 +1,18 @@
 <?php
 
+/**
+ * Komisi
+ *
+ * @property integer $id
+ * @property string $tipe
+ * @property integer $nominal
+ * @property string $tanggal
+ * @method static \Illuminate\Database\Query\Builder|\Komisi whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Komisi whereTipe($value)
+ * @method static \Illuminate\Database\Query\Builder|\Komisi whereNominal($value)
+ * @method static \Illuminate\Database\Query\Builder|\Komisi whereTanggal($value)
+ * @method static \Model terakhir()
+ */
 class Komisi extends Model
 {
 

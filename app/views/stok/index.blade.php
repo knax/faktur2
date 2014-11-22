@@ -18,13 +18,13 @@
       </tr>
       </tfoot>
       <tbody>
-      @foreach ($barang as $baris)
+      @foreach ($listBarang as $barang)
       <tr>
-        <td>{{$baris->id}}</td>
-        <td>{{$baris->nama}}</td>
-        <td>{{toRupiah($baris->harga)}}</td>
-        <td>{{$baris->stok()->stok}}</td>
-        <td>{{toRupiah($baris->harga * $baris->stok()->stok)}}</td>
+        <td>{{$barang->id}}</td>
+        <td>{{$barang->nama}}</td>
+        <td>{{toRupiah($barang->harga)}}</td>
+        <td>{{$barang->stokTerakhir()->stok}}</td>
+        <td>{{toRupiah($barang->harga * $barang->stokTerakhir()->stok)}}</td>
       </tr>
       @endforeach
       </tbody>

@@ -1,6 +1,6 @@
 @extends('layout.main')
 @section('content')
-<form role="form" action="/penjualan/marketing" method="POST">
+<form role="form" action="/penjualan/marketing" method="POST" id="form-marketing">
   <div class="row">
     <div class="col-md-12">
       <div class="form-group">
@@ -27,8 +27,8 @@
         <label for="barang">Nama Barang</label>
         <select class="form-control data" name="id_barang" id="barang">
           @foreach($listBarang as $barang)
-          <option value="{{$barang->nama}}" data-stok="{{$barang->stok()->stok}}" data-range-harga="{{$barang->rangeHarga()}}"
-                  data-id="{{$barang->id}}">{{$barang->nama}}
+          <option value="{{$barang->nama}}" data-stok="{{$barang->stokTerakhir()->stok}}" data-range-harga="{{$barang->rangeHarga()}}"
+                  data-id="{{$barang->id}}" data-harga-bawah="{{$barang->hargaBawah()}}" data-harga-atas="{{$barang->hargaAtas()}}">{{$barang->nama}}
           </option>
           @endforeach
         </select>

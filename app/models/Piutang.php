@@ -1,5 +1,22 @@
 <?php
 
+/**
+ * Piutang
+ *
+ * @property-read \Pembelian $pelanggan
+ * @property-read \Illuminate\Database\Eloquent\Collection|\PembayaranPiutang[] $pembayaran
+ * @property integer $id
+ * @property string $tanggal
+ * @property string $jatuh_tempo
+ * @property integer $sisa_piutang
+ * @property integer $id_pelanggan
+ * @method static \Illuminate\Database\Query\Builder|\Piutang whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Piutang whereTanggal($value)
+ * @method static \Illuminate\Database\Query\Builder|\Piutang whereJatuhTempo($value)
+ * @method static \Illuminate\Database\Query\Builder|\Piutang whereSisaPiutang($value)
+ * @method static \Illuminate\Database\Query\Builder|\Piutang whereIdPelanggan($value)
+ * @method static \Model terakhir()
+ */
 class Piutang extends Model
 {
 

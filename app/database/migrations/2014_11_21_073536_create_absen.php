@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateUser extends Migration
+class CreateAbsen extends Migration
 {
 
     /**
@@ -13,11 +13,12 @@ class CreateUser extends Migration
      */
     public function up()
     {
-        Schema::create('user', function (Blueprint $table) {
+        Schema::create('absen', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('username', 255);
-            $table->string('password', 255);
-            $table->string('type', 255);
+            $table->string('kehadiran')->default('tidak');
+            $table->date('tanggal');
+            $table->integer('id_karyawan')->unsigned();
+            $table->foreign('id_karyawan')->references('id')->on('karyawan');
         });
     }
 
@@ -28,7 +29,7 @@ class CreateUser extends Migration
      */
     public function down()
     {
-        Schema::drop('user');
+        Schema::drop('absen');
     }
 
 }
