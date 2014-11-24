@@ -17,78 +17,74 @@ Route::get('', function () {
 
 Route::group(['prefix' => 'stok'], function () {
     Route::group(['prefix' => 'barang'], function () {
-        Route::get('', 'BarangController@barang');
-        Route::post('', 'BarangController@buatBarang');
-        Route::get('tambah', 'BarangController@buatBarangForm');
-        Route::get('{id}', 'BarangController@detail');
-        Route::post('{id}', 'BarangController@editBarang');
-        Route::get('{id}/edit', 'BarangController@editBarangForm');
+        Route::get('', ['as' => 'barang.list', 'uses' => 'BarangController@barang']);
+        Route::post('', ['as' => 'barang.buat', 'uses' => 'BarangController@buatBarang']);
+        Route::get('tambah', ['as' => 'barang.buat.form', 'uses' => 'BarangController@buatBarangForm']);
+        Route::get('{id}', ['as' => 'barang.detail', 'uses' => 'BarangController@detail']);
+        Route::get('{id}/edit', ['as' => 'barang.edit', 'uses' => 'BarangController@editBarangForm']);
+        Route::post('{id}', ['as' => 'barang.edit.form', 'uses' => 'BarangController@editBarang']);
     });
-    Route::get('', 'BarangController@index');
+    Route::get('', ['as' => 'barang.stok', 'uses' => 'BarangController@index']);
 });
 
-Route::group(['prefix' => 'penjualan'], function () {
-    Route::group(['prefix' => 'kasir'], function () {
-        Route::get('', 'KasirController@daftarPenjualanBelumDibayar');
-        Route::get('{id}', 'KasirController@bayarForm');
-        Route::post('{id}', 'KasirController@bayar');
-    });
-    Route::get('marketing', 'MarketingController@jualBarangForm');
-    Route::post('marketing', 'MarketingController@jualBarang');
+Route::group(['prefix' => 'kasir'], function () {
+    Route::get('', ['as' => 'kasir.list', 'uses' => 'KasirController@daftarPenjualanBelumDibayar']);
+    Route::get('{id}', ['as' => 'kasir.bayar.form', 'uses' => 'KasirController@bayarForm']);
+    Route::post('{id}', ['as' => 'kasir.bayar', 'uses' => 'KasirController@bayar']);
+});
+
+Route::group(['prefix' => 'marketing'], function () {
+    Route::get('jual', ['as' => 'marketing.jual.form', 'uses' => 'MarketingController@jualBarangForm']);
+    Route::post('jual', ['as' => 'marketing.jual', 'uses' => 'MarketingController@jualBarang']);
 });
 
 Route::group(['prefix' => 'pelanggan'], function () {
-    Route::get('', 'PelangganController@listPelanggan');
-    Route::get('{id}', 'PelangganController@bayarPiutangForm');
-    Route::post('{id}', 'PelangganController@bayarPiutang');
+    Route::get('', ['as' => 'pelanggan.list', 'uses' => 'PelangganController@listPelanggan']);
+    Route::get('{id}', ['as' => 'pelanggan.bayar.form', 'uses' => 'PelangganController@bayarPiutangForm']);
+    Route::post('{id}', ['as' => 'pelanggan.bayar', 'uses' => 'PelangganController@bayarPiutang']);
 });
 
 Route::group(['prefix' => 'keuntungan'], function () {
-    Route::get('barang_terjual', 'KeuntunganController@barangTerjual');
-    Route::post('barang_terjual', 'KeuntunganController@barangTerjual');
-    Route::get('', 'KeuntunganController@index');
+    Route::get('', ['as' => 'keuntungan.laporan', 'uses' => 'KeuntunganController@index']);
+    Route::get('barang_terjual', ['as' => 'keuntungan.barang_terjual', 'uses' => 'KeuntunganController@barangTerjual']);
 });
 
 Route::group(['prefix' => 'pembelian'], function () {
-    Route::get('', 'PembelianController@beliBarangForm');
-    Route::post('', 'PembelianController@beliBarang');
-    Route::group(['prefix' => 'hutang'], function () {
-        Route::get('', 'HutangController@listHutang');
-        Route::get('{id}', 'HutangController@bayarHutangForm');
-        Route::post('{id}', 'HutangController@bayarHutang');
-    });
+    Route::get('', ['as' => 'pembelian.beli.form', 'uses' => 'PembelianController@beliBarangForm']);
+    Route::post('', ['as' => 'pembelian.beli', 'uses' => 'PembelianController@beliBarang']);
+});
+
+Route::group(['prefix' => 'hutang'], function () {
+    Route::get('', ['as' => 'hutang.list', 'uses' => 'HutangController@listHutang']);
+    Route::get('{id}', ['as' => 'hutang.bayar.form', 'uses' => 'HutangController@bayarHutangForm']);
+    Route::post('{id}', ['as' => 'hutang.bayar', 'uses' => 'HutangController@bayarHutang']);
 });
 
 Route::group(['prefix' => 'biaya'], function () {
-    Route::get('', 'BiayaController@index');
-    Route::post('', 'BiayaController@buatBiaya');
-    Route::get('komisi', 'BiayaController@buatKomisiForm');
-    Route::post('komisi', 'BiayaController@buatKomisi');
+    Route::get('', ['as' => 'biaya.list', 'uses' => 'BiayaController@index']);
+    Route::post('', ['as' => 'biaya.buat', 'uses' => 'BiayaController@buatBiaya']);
+    Route::get('komisi', ['as' => 'biaya.komisi.buat.form', 'uses' => 'BiayaController@buatKomisiForm']);
+    Route::post('komisi', ['as' => 'biaya.komisi.buat', 'uses' => 'BiayaController@buatKomisi']);
 });
 
 Route::group(['prefix' => 'login'], function () {
-    Route::get('', 'LoginController@loginForm');
-    Route::post('', 'LoginController@login');
+    Route::get('', ['as' => 'auth.login.form', 'uses' => 'LoginController@loginForm']);
+    Route::post('', ['as' => 'auth.login', 'uses' => 'LoginController@login']);
 });
 
+Route::get('logout', ['as' => 'auth.logout', 'uses' => 'LoginController@logout']);
+
 Route::group(['prefix' => 'karyawan'], function () {
-    Route::get('', 'KaryawanController@listKaryawan');
+    Route::get('', ['as' => 'karyawan.list', 'uses' => 'KaryawanController@listKaryawan']);
     Route::group(['prefix' => 'absen'], function () {
-        Route::get('', 'KaryawanController@listAbsen');
-        Route::get('{id}/{tipe}', 'KaryawanController@absenKaryawan')
+        Route::get('', ['as' => 'karyawan.absen.list', 'uses' => 'KaryawanController@listAbsen']);
+        Route::get('{id}/{tipe}', ['as' => 'karyawan.absen', 'uses' => 'KaryawanController@absenKaryawan'])
              ->where('id', '[0-9]+')
              ->where('tipe', '(masuk|setengah_hari|tidak)');
     });
-    Route::get('absen', 'KaryawanController@listAbsen');
-    Route::get('lemburan', 'KaryawanController@listLemburan');
-    Route::get('{id}', 'KaryawanController@detailKaryawan');
+    Route::get('lemburan', ['as' => 'karyawan.lemburan.list', 'uses' => 'KaryawanController@listLemburan']);
+    Route::get('{id}', ['as' => 'karyawan.detail', 'uses' => 'KaryawanController@detailKaryawan']);
 });
 
-Route::get('logout', 'LoginController@logout');
-
 Route::get('test', function () {
-    $listBarang = Barang::all();
-    foreach ($listBarang as $barang) {
-        var_dump($barang->stokTerakhir()->stok);
-    }
 });

@@ -11,24 +11,24 @@ class UserTableSeeder extends Seeder
         $faker = Faker::create();
 
         User::create([
-            'username' => 'knax',
-            'password' => Hash::make('standar'),
-            'tipe'     => 'super_admin'
+            'username'     => 'knax',
+            'password'     => Hash::make('standar'),
+            'id_tipe_user' => '1'
         ]);
 
         foreach (range(1, 10) as $index) {
             User::create([
-                'username' => $faker->userName,
-                'password' => Hash::make('marketing'),
-                'tipe'     => 'marketing'
+                'username'     => $faker->userName,
+                'password'     => Hash::make('marketing'),
+                'id_tipe_user' => '1'
             ]);
         }
 
         foreach (range(1, 10) as $index) {
             User::create([
-                'username' => $faker->userName,
-                'password' => Hash::make('kasir'),
-                'tipe'     => 'kasir'
+                'username'     => $faker->userName,
+                'password'     => Hash::make('kasir'),
+                'id_tipe_user' => '1'
             ]);
         }
     }

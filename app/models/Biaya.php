@@ -12,6 +12,9 @@
  * @method static \Illuminate\Database\Query\Builder|\Biaya whereKeterangan($value)
  * @method static \Illuminate\Database\Query\Builder|\Biaya whereTanggal($value)
  * @method static \Model terakhir()
+ * @method static \Model hariIni() 
+ * @method static \Model tanggal($tanggal) 
+ * @method static \Model tanggalText($tanggal) 
  */
 class Biaya extends Model
 {

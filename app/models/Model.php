@@ -4,6 +4,9 @@
  * Model
  *
  * @method static \Model terakhir()
+ * @method static \Model hariIni() 
+ * @method static \Model tanggal($tanggal) 
+ * @method static \Model tanggalText($tanggal) 
  */
 class Model extends \Eloquent
 {

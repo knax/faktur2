@@ -12,7 +12,27 @@
 */
 
 App::before(function ($request) {
-    //
+
+    if(!Auth::check()) {
+        View::share('urlList', []);
+        return;
+    }
+    $user = User::find(1);
+
+    $hakAksesList = $user->tipeUser->hakAkses;
+
+    $urlList = [];
+
+    foreach ($hakAksesList as $hakAkses) {
+        $url = explode('.', $hakAkses->nama);
+        if( $url[0] == 'auth' ) {
+            continue;
+        }
+
+        $urlList[$url[0]][] = (object) ['nama' => URL::route($hakAkses->nama), 'judul' => $hakAkses->nama];
+    }
+
+    View::share('urlList', $urlList);
 });
 
 App::after(function ($request, $response) {

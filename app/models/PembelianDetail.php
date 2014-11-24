@@ -13,6 +13,9 @@
  * @method static \Illuminate\Database\Query\Builder|\PembelianDetail whereIdPembelian($value)
  * @method static \Illuminate\Database\Query\Builder|\PembelianDetail whereIdBarang($value)
  * @method static \Model terakhir()
+ * @method static \Model hariIni() 
+ * @method static \Model tanggal($tanggal) 
+ * @method static \Model tanggalText($tanggal) 
  */
 class PembelianDetail extends Model
 {

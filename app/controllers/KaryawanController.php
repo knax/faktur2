@@ -21,7 +21,6 @@ class KaryawanController extends \BaseController
     {
         $tanggal = Input::get('tanggal');
 
-
         if( is_null($tanggal) ) {
             $tanggal = new DateTime();
         } else {

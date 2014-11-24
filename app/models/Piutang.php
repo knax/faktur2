@@ -16,6 +16,9 @@
  * @method static \Illuminate\Database\Query\Builder|\Piutang whereSisaPiutang($value)
  * @method static \Illuminate\Database\Query\Builder|\Piutang whereIdPelanggan($value)
  * @method static \Model terakhir()
+ * @method static \Model hariIni() 
+ * @method static \Model tanggal($tanggal) 
+ * @method static \Model tanggalText($tanggal) 
  */
 class Piutang extends Model
 {

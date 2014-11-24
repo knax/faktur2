@@ -10,6 +10,9 @@
  * @property-read \Illuminate\Database\Eloquent\Collection|\Absen[] $absen
  * @property-read \Illuminate\Database\Eloquent\Collection|\Lemburan[] $lemburan
  * @method static \Model terakhir()
+ * @method static \Model hariIni() 
+ * @method static \Model tanggal($tanggal) 
+ * @method static \Model tanggalText($tanggal) 
  */
 class Karyawan extends Model
 {

@@ -19,6 +19,11 @@ use Illuminate\Auth\UserTrait;
  * @method static \Illuminate\Database\Query\Builder|\User whereTipe($value)
  * @method static \Illuminate\Database\Query\Builder|\User whereRememberToken($value)
  * @method static \Model terakhir()
+ * @property integer $id_tipe_user
+ * @method static \Illuminate\Database\Query\Builder|\User whereIdTipeUser($value) 
+ * @method static \Model hariIni() 
+ * @method static \Model tanggal($tanggal) 
+ * @method static \Model tanggalText($tanggal) 
  */
 class User extends Model implements UserInterface
 {
@@ -29,4 +34,9 @@ class User extends Model implements UserInterface
     protected $guarded = ['id'];
     protected $hidden = ['password'];
 
+    public function tipeUser()
+    {
+        return $this->belongsTo('TipeUser', 'id_tipe_user', 'id');
+    }
+    
 }

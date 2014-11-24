@@ -15,6 +15,9 @@
  * @method static \Illuminate\Database\Query\Builder|\PembayaranPiutang whereTanggal($value)
  * @method static \Illuminate\Database\Query\Builder|\PembayaranPiutang whereIdPiutang($value)
  * @method static \Model terakhir()
+ * @method static \Model hariIni() 
+ * @method static \Model tanggal($tanggal) 
+ * @method static \Model tanggalText($tanggal) 
  */
 class PembayaranPiutang extends Model
 {

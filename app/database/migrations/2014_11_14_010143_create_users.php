@@ -18,8 +18,9 @@ class CreateUsers extends Migration
             $table->string('full_name');
             $table->string('username', 255);
             $table->string('password', 255);
-            $table->string('tipe', 255);
             $table->string('remember_token', 255);
+            $table->integer('id_tipe_user')->unsigned();
+            $table->foreign('id_tipe_user')->references('id')->on('tipe_user');
         });
     }
 

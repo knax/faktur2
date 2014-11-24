@@ -17,6 +17,9 @@
  * @method static \Illuminate\Database\Query\Builder|\Hutang whereSisaHutang($value)
  * @method static \Illuminate\Database\Query\Builder|\Hutang whereIdPembelian($value)
  * @method static \Model terakhir()
+ * @method static \Model hariIni() 
+ * @method static \Model tanggal($tanggal) 
+ * @method static \Model tanggalText($tanggal) 
  */
 class Hutang extends Model
 {

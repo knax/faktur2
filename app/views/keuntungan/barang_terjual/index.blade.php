@@ -8,7 +8,7 @@
 <hr/>
 <div class="row">
   <div class="col-md-offset-8 col-md-4">
-    <form class="form-horizontal" action="/keuntungan/barang_terjual" method="post">
+    <form class="form-horizontal" action="/keuntungan/barang_terjual" method="get">
       <div class="form-group">
         <label for="tanggal-mulai" class="control-label col-md-4">Tanggal Mulai</label>
 

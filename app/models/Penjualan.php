@@ -19,6 +19,9 @@
  * @method static \Illuminate\Database\Query\Builder|\Penjualan whereTanggalPembayaran($value)
  * @method static \Illuminate\Database\Query\Builder|\Penjualan whereIdPelanggan($value)
  * @method static \Model terakhir()
+ * @method static \Model hariIni() 
+ * @method static \Model tanggal($tanggal) 
+ * @method static \Model tanggalText($tanggal) 
  */
 class Penjualan extends Model
 {
