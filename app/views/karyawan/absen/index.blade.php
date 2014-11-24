@@ -43,19 +43,19 @@
 				<td>{{$karyawan->id}}</td>
 				<td>{{$karyawan->nama}}</td>
 				@if($karyawan->absen()->tanggalText($tanggalRaw)->first()->kehadiran == 'tidak')
-				<td><a href="/karyawan/absen/{{$karyawan->id}}/tidak" class="btn btn-success">Tidak Masuk</a></td>
+				<td><a href="/karyawan/absen/{{$karyawan->id}}/tidak/{{{$tanggalRaw}}}" class="btn btn-success">Tidak Masuk</a></td>
 				@else
-				<td><a href="/karyawan/absen/{{$karyawan->id}}/tidak" class="btn btn-default">Tidak Masuk</a></td>
+				<td><a href="/karyawan/absen/{{$karyawan->id}}/tidak/{{{$tanggalRaw}}}" class="btn btn-default">Tidak Masuk</a></td>
 				@endif
 				@if($karyawan->absen()->tanggalText($tanggalRaw)->first()->kehadiran == 'setengah_hari')
-				<td><a href="/karyawan/absen/{{$karyawan->id}}/setengah_hari" class="btn btn-success">Setengah Hari</a></td>
+				<td><a href="/karyawan/absen/{{$karyawan->id}}/setengah_hari/{{{$tanggalRaw}}}" class="btn btn-success">Setengah Hari</a></td>
 				@else
-				<td><a href="/karyawan/absen/{{$karyawan->id}}/setengah_hari" class="btn btn-default">Setengah Hari</a></td>
+				<td><a href="/karyawan/absen/{{$karyawan->id}}/setengah_hari/{{{$tanggalRaw}}}" class="btn btn-default">Setengah Hari</a></td>
 				@endif
 				@if($karyawan->absen()->tanggalText($tanggalRaw)->first()->kehadiran == 'masuk')
-				<td><a href="/karyawan/absen/{{$karyawan->id}}/masuk" class="btn btn-success">Masuk</a></td>
+				<td><a href="/karyawan/absen/{{$karyawan->id}}/masuk/{{{$tanggalRaw}}}" class="btn btn-success">Masuk</a></td>
 				@else
-				<td><a href="/karyawan/absen/{{$karyawan->id}}/masuk" class="btn btn-default">Masuk</a></td>
+				<td><a href="/karyawan/absen/{{$karyawan->id}}/masuk/{{{$tanggalRaw}}}" class="btn btn-default">Masuk</a></td>
 				@endif
 			</tr>
 			@endforeach

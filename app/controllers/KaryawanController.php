@@ -27,9 +27,9 @@ class KaryawanController extends \BaseController
             $tanggal = DateTime::createFromFormat('Y-m-d', $tanggal);
         }
 
-//        var_dump($tanggal);
+        //        var_dump($tanggal);
 
-        $listKaryawan = Karyawan::whereHas('absen', function ($q) use($tanggal) {
+        $listKaryawan = Karyawan::whereHas('absen', function ($q) use ($tanggal) {
             $q->where('tanggal', '=', $tanggal->format('Y-m-d'));
         })->get();
 
@@ -42,16 +42,18 @@ class KaryawanController extends \BaseController
                    ->with('tanggal', $formatter->format($tanggal));
     }
 
-    public function absenKaryawan($id, $tipe)
+    public function absenKaryawan($id, $tipe, $tanggal)
     {
         $karyawan = Karyawan::findOrFail($id);
 
         // TODO tanggal absen sebelumnya
-        $absen = $karyawan->absenTerakhir();
+        $absen = $karyawan->absen()->tanggalText($tanggal)->first();
+        //        var_dump($absen);
         $absen->kehadiran = $tipe;
         $absen->save();
 
-        return Redirect::to('/karyawan/absen');
+        //        var_dump($tanggal);
+        return Redirect::to('/karyawan/absen?tanggal=' . $tanggal);
     }
 
     public function listLemburan()

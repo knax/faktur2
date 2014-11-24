@@ -37,56 +37,10 @@
 				</li>
 				@empty
 				@endforelse
-				<!--<li><a href="/">Beranda</a></li>-->
-				<!--<li class="dropdown">-->
-				<!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
-				<!--Stok <span class="caret"></span>-->
-				<!--</a>-->
-				<!--<ul class="dropdown-menu" role="menu">-->
-				<!--<li><a href="/stok">Stok</a></li>-->
-				<!--<li><a href="/stok/barang">Barang</a></li>-->
-				<!--</ul>-->
-				<!--</li>-->
-				<!--<li class="dropdown">-->
-				<!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
-				<!--Penjualan <span class="caret"></span>-->
-				<!--</a>-->
-				<!--<ul class="dropdown-menu" role="menu">-->
-				<!--<li><a href="/penjualan/marketing">Marketing</a></li>-->
-				<!--<li><a href="/penjualan/kasir">Kasir</a></li>-->
-				<!--</ul>-->
-				<!--</li>-->
-				<!--<li><a href="/pelanggan">Pelanggan</a></li>-->
-				<!--<li class="dropdown">-->
-				<!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
-				<!--Laporan <span class="caret"></span>-->
-				<!--</a>-->
-				<!--<ul class="dropdown-menu" role="menu">-->
-				<!--<li><a href="/keuntungan">Laporan</a></li>-->
-				<!--<li><a href="/keuntungan/barang_terjual">Barang Terjual</a></li>-->
-				<!--</ul>-->
-				<!--</li>-->
-				<!--<li class="dropdown">-->
-				<!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
-				<!--Pembelian <span class="caret"></span>-->
-				<!--</a>-->
-				<!--<ul class="dropdown-menu" role="menu">-->
-				<!--<li><a href="/pembelian">Pembelian</a></li>-->
-				<!--<li><a href="/pembelian/hutang">Daftar Hutang</a></li>-->
-				<!--</ul>-->
-				<!--</li>-->
-				<!--<li class="dropdown">-->
-				<!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
-				<!--Biaya <span class="caret"></span>-->
-				<!--</a>-->
-				<!--<ul class="dropdown-menu" role="menu">-->
-				<!--<li><a href="/biaya">Biaya Tambahan</a></li>-->
-				<!--<li><a href="/biaya/komisi">Komisi</a></li>-->
-				<!--</ul>-->
-				<!--</li>-->
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				@if(Auth::check())
+				<li><p class="navbar-text">{{Auth::user()->username}}</p></li>
 				<li><a href="{{URL::route('auth.logout')}}">Logout</a></li>
 				@else
 				<li><a href="{{URL::route('auth.login')}}">Login</a></li>

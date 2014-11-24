@@ -258,7 +258,7 @@ class Keuntungan extends Model
 
     public static function hutangAwal()
     {
-        $listHutang = Hutang::padaTanggal((new DateTime())->modify('-1 days')->format('Y-m-d'))->get();
+        $listHutang = Hutang::padaTanggal((new DateTime())->modify('-1 days'));
 
         $totalHutang = 0;
 

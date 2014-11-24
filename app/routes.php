@@ -78,7 +78,7 @@ Route::group(['prefix' => 'karyawan'], function () {
     Route::get('', ['as' => 'karyawan.list', 'uses' => 'KaryawanController@listKaryawan']);
     Route::group(['prefix' => 'absen'], function () {
         Route::get('', ['as' => 'karyawan.absen.list', 'uses' => 'KaryawanController@listAbsen']);
-        Route::get('{id}/{tipe}', ['as' => 'karyawan.absen', 'uses' => 'KaryawanController@absenKaryawan'])
+        Route::get('{id}/{tipe}/{tanggal}', ['as' => 'karyawan.absen', 'uses' => 'KaryawanController@absenKaryawan'])
              ->where('id', '[0-9]+')
              ->where('tipe', '(masuk|setengah_hari|tidak)');
     });
