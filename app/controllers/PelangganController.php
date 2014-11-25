@@ -10,6 +10,14 @@ class PelangganController extends \BaseController
         return View::make('pelanggan.index', ['listPelanggan' => $listPelanggan]);
     }
 
+    public function listPembelianPelanggan($id)
+    {
+        $pelanggan = Pelanggan::findOrFail($id);
+
+//        var_dump($pelanggan->penjualan);
+        return View::make('pelanggan.detail', ['pelanggan' => $pelanggan]);
+    }
+
     public function bayarPiutangForm($id)
     {
         $pelanggan = Pelanggan::findOrFail($id);

@@ -27,6 +27,6 @@ class PenjualanDetail extends Model
 
     public function barang()
     {
-        return $this->belongsTo('Barang', 'id_barang', 'id')->first();
+        return $this->belongsTo('Barang', 'id_barang', 'id');
     }
 }

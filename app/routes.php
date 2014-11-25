@@ -40,8 +40,9 @@ Route::group(['prefix' => 'marketing'], function () {
 
 Route::group(['prefix' => 'pelanggan'], function () {
     Route::get('', ['as' => 'pelanggan.list', 'uses' => 'PelangganController@listPelanggan']);
-    Route::get('{id}', ['as' => 'pelanggan.bayar.form', 'uses' => 'PelangganController@bayarPiutangForm']);
-    Route::post('{id}', ['as' => 'pelanggan.bayar', 'uses' => 'PelangganController@bayarPiutang']);
+    Route::get('{id}', ['as' => 'pelanggan.detail', 'uses' => 'PelangganController@listPembelianPelanggan']);
+//    Route::get('{id}', ['as' => 'pelanggan.bayar.form', 'uses' => 'PelangganController@bayarPiutangForm']);
+//    Route::post('{id}', ['as' => 'pelanggan.bayar', 'uses' => 'PelangganController@bayarPiutang']);
 });
 
 Route::group(['prefix' => 'keuntungan'], function () {
