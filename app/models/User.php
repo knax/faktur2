@@ -20,10 +20,11 @@ use Illuminate\Auth\UserTrait;
  * @method static \Illuminate\Database\Query\Builder|\User whereRememberToken($value)
  * @method static \Model terakhir()
  * @property integer $id_tipe_user
- * @method static \Illuminate\Database\Query\Builder|\User whereIdTipeUser($value) 
- * @method static \Model hariIni() 
- * @method static \Model tanggal($tanggal) 
- * @method static \Model tanggalText($tanggal) 
+ * @method static \Illuminate\Database\Query\Builder|\User whereIdTipeUser($value)
+ * @method static \Model hariIni()
+ * @method static \Model tanggal($tanggal)
+ * @method static \Model tanggalText($tanggal)
+ * @property-read \TipeUser $tipeUser
  */
 class User extends Model implements UserInterface
 {

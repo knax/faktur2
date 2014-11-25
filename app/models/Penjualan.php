@@ -3,22 +3,22 @@
 /**
  * Penjualan
  *
- * @property-read \Pelanggan $pelanggan
- * @property-read \Illuminate\Database\Eloquent\Collection|\PenjualanDetail[] $listBarangTerjual
- * @property-read \Illuminate\Database\Eloquent\Collection|\PenjualanDetail[] $detail
  * @property integer $id
  * @property string $tanggal_penjualan
  * @property boolean $sudah_dibayar
  * @property string $metode_pembayaran
  * @property string $tanggal_pembayaran
  * @property integer $id_pelanggan
- * @method static \Illuminate\Database\Query\Builder|\Penjualan whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\Penjualan whereTanggalPenjualan($value)
- * @method static \Illuminate\Database\Query\Builder|\Penjualan whereSudahDibayar($value)
- * @method static \Illuminate\Database\Query\Builder|\Penjualan whereMetodePembayaran($value)
- * @method static \Illuminate\Database\Query\Builder|\Penjualan whereTanggalPembayaran($value)
- * @method static \Illuminate\Database\Query\Builder|\Penjualan whereIdPelanggan($value)
- * @method static \Model terakhir()
+ * @property-read \Pelanggan $pelanggan
+ * @property-read \Illuminate\Database\Eloquent\Collection|\PenjualanDetail[] $listBarangTerjual
+ * @property-read \Illuminate\Database\Eloquent\Collection|\PenjualanDetail[] $detail
+ * @method static \Illuminate\Database\Query\Builder|\Penjualan whereId($value) 
+ * @method static \Illuminate\Database\Query\Builder|\Penjualan whereTanggalPenjualan($value) 
+ * @method static \Illuminate\Database\Query\Builder|\Penjualan whereSudahDibayar($value) 
+ * @method static \Illuminate\Database\Query\Builder|\Penjualan whereMetodePembayaran($value) 
+ * @method static \Illuminate\Database\Query\Builder|\Penjualan whereTanggalPembayaran($value) 
+ * @method static \Illuminate\Database\Query\Builder|\Penjualan whereIdPelanggan($value) 
+ * @method static \Model terakhir() 
  * @method static \Model hariIni() 
  * @method static \Model tanggal($tanggal) 
  * @method static \Model tanggalText($tanggal) 

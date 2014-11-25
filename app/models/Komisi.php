@@ -12,9 +12,9 @@
  * @method static \Illuminate\Database\Query\Builder|\Komisi whereNominal($value)
  * @method static \Illuminate\Database\Query\Builder|\Komisi whereTanggal($value)
  * @method static \Model terakhir()
- * @method static \Model hariIni() 
- * @method static \Model tanggal($tanggal) 
- * @method static \Model tanggalText($tanggal) 
+ * @method static \Model hariIni()
+ * @method static \Model tanggal($tanggal)
+ * @method static \Model tanggalText($tanggal)
  */
 class Komisi extends Model
 {

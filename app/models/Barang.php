@@ -17,9 +17,9 @@
  * @method static \Illuminate\Database\Query\Builder|\Barang whereBatasKeuntunganAtas($value)
  * @method static \Illuminate\Database\Query\Builder|\Barang whereBatasKeuntunganBawah($value)
  * @method static \Model terakhir()
- * @method static \Model hariIni() 
- * @method static \Model tanggal($tanggal) 
- * @method static \Model tanggalText($tanggal) 
+ * @method static \Model hariIni()
+ * @method static \Model tanggal($tanggal)
+ * @method static \Model tanggalText($tanggal)
  */
 class Barang extends Model
 {

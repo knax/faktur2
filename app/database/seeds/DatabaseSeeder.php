@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call('KaryawanTableSeeder');
         $this->call('TipeUserTableSeeder');
         $this->call('UserTableSeeder');
+        $this->call('BarangTitipanTableSeeder');
     }
 
 }

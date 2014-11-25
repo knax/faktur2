@@ -13,9 +13,9 @@
  * @method static \Illuminate\Database\Query\Builder|\Pembelian whereMetodePembayaran($value)
  * @method static \Illuminate\Database\Query\Builder|\Pembelian whereTanggalPembelian($value)
  * @method static \Model terakhir()
- * @method static \Model hariIni() 
- * @method static \Model tanggal($tanggal) 
- * @method static \Model tanggalText($tanggal) 
+ * @method static \Model hariIni()
+ * @method static \Model tanggal($tanggal)
+ * @method static \Model tanggalText($tanggal)
  */
 class Pembelian extends Model
 {

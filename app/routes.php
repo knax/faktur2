@@ -86,5 +86,13 @@ Route::group(['prefix' => 'karyawan'], function () {
     Route::get('{id}', ['as' => 'karyawan.detail', 'uses' => 'KaryawanController@detailKaryawan']);
 });
 
+Route::group(['prefix' => 'barang_titipan'], function () {
+    Route::get('', ['as' => 'barang_titipan.list', 'uses' => 'BarangTitipanController@listBarangTitipan']);
+    Route::get('buat', ['as' => 'barang_titipan.buat.form', 'uses' => 'BarangTitipanController@buatBarangTitipanForm']);
+    Route::post('', ['as' => 'barang_titipan.buat', 'uses' => 'BarangTitipanController@buatBarangTitipan']);
+    Route::get('{id}', ['as' => 'barang_titipan.kurangi.form', 'uses' => 'BarangTitipanController@kurangiBarangTitipanForm']);
+    Route::post('{id}', ['as' => 'barang_titipan.kurangi', 'uses' => 'BarangTitipanController@kurangiBarangTitipan']);
+});
+
 Route::get('test', function () {
 });

@@ -16,7 +16,7 @@
  * @method static \Stok tanggal($tanggal)
  * @method static \Stok terakhir()
  * @property-read \Illuminate\Database\Eloquent\Collection|\StokPerpindahan[] $stokPerpindahan
- * @method static \Model tanggalText($tanggal) 
+ * @method static \Model tanggalText($tanggal)
  */
 class Stok extends Model
 {
