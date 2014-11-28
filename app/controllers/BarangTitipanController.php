@@ -15,31 +15,49 @@ class BarangTitipanController extends BaseController
         return View::make('barang_titipan.create');
     }
 
+    public function barangTitipan($id)
+    {
+        $barangTitipan = BarangTitipan::findOrFail($id);
+
+        return View::make('barang_titipan.details')->with('barangTitipan', $barangTitipan);
+    }
+
+
     public function buatBarangTitipan()
     {
         $barangTitipan = new BarangTitipan();
 
-        $barangTitipan->nama_barang = Input::get('nama_barang');
         $barangTitipan->nama_penitip = Input::get('nama_penitip');
-        $barangTitipan->unit = Input::get('unit');
 
         $barangTitipan->save();
+
+        $listBarangTitipan = Input::get('barang');
+
+        foreach ($listBarangTitipan as $detail) {
+            $barangTitipanDetail = new BarangTitipanDetail();
+
+            $barangTitipanDetail->id_barang_titipan = $barangTitipan->id;
+            $barangTitipanDetail->nama = $detail['nama-barang'];
+            $barangTitipanDetail->unit = $detail['unit'];
+
+            $barangTitipanDetail->save();
+        }
 
         return Redirect::to('/');
     }
 
-    public function kurangiBarangTitipanForm($id)
+    public function kurangiBarangTitipanForm($id, $id_barang)
     {
-        return View::make('barang_titipan.kurangi')->with('barangTitipan', BarangTitipan::findOrFail($id));
+        return View::make('barang_titipan.kurangi')->with('barangTitipanDetail', BarangTitipanDetail::findOrFail($id_barang));
     }
 
-    public function kurangiBarangTitipan($id)
+    public function kurangiBarangTitipan($id, $id_barang)
     {
-        $barangTitipan = BarangTitipan::findOrFail($id);
+        $barangTitipanDetail = BarangTitipanDetail::findOrFail($id_barang);
 
-        $barangTitipan->unit = $barangTitipan->unit - Input::get('unit');
+        $barangTitipanDetail->unit = $barangTitipanDetail->unit - Input::get('unit');
 
-        $barangTitipan->save();
+        $barangTitipanDetail->save();
 
         return Redirect::to('/');
     }

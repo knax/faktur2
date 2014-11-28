@@ -23,6 +23,18 @@ var Faktur = {
         });
         $('td#total-harga-barang').html(Faktur.toRupiah(totalHarga));
     },
+    tambahDataKeTabelPenitipan: function ($tableBody, $inputs) {
+
+        var $row = $('<tr/>');
+        var id = $tableBody.data('last-id') + 1;
+
+        $tableBody.data('last-id', id);
+        $row.append($('<td/>').html(id));
+
+        $row.appendTo($tableBody);
+
+        Faktur.inputToTable($inputs, $row, id);
+    },
     tambahDataKeTabelPembelian: function ($tableBody, $inputs) {
 
         var $row = $('<tr/>');
@@ -52,7 +64,7 @@ var Faktur = {
         $('input#total-harga').val(totalHarga);
 
     },
-    inputToTable: function($inputs, $row, id) {
+    inputToTable: function ($inputs, $row, id) {
         $inputs.each(function () {
             var $cell = $('<td/>');
             var $input = $('<input/>');
@@ -115,6 +127,14 @@ var $inputsPembelian = $('.data-pembelian');
 $('button#tambah-pembelian').click(function (e) {
     e.preventDefault();
     Faktur.tambahDataKeTabelPembelian($tableBodyPembelian, $inputsPembelian);
+});
+
+
+var $tableBodyPenitipan = $('table#data-penitipan > tbody');
+var $inputsPenitipan = $('.data-penitipan');
+$('button#tambah-penitipan').click(function (e) {
+    e.preventDefault();
+    Faktur.tambahDataKeTabelPenitipan($tableBodyPenitipan, $inputsPenitipan);
 });
 
 var $jenisKonsumen = $('input#jenis-konsumen');

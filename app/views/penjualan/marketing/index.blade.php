@@ -1,6 +1,6 @@
 @extends('layout.main')
 @section('content')
-<form role="form" action="/penjualan/marketing" method="POST" id="form-marketing">
+<form role="form" action="/marketing/jual" method="POST" id="form-marketing">
   <div class="row">
     <div class="col-md-12">
       <div class="form-group">

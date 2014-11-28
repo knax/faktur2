@@ -20,15 +20,21 @@ class Karyawan extends Model
     protected $table = 'karyawan';
     protected $guarded = ['id'];
 
-    public function absenTerakhir()
+    public function ambilAbsen($tanggal)
     {
-        $absen = $this->absen()->hariIni()->first();
+        if($tanggal != (new DateTime())->format('Y-m-d')) {
+            $absen = $this->absen()->tanggalText($tanggal)->first();
+        } else {
+            $absen = $this->absen()->hariIni()->first();
+        }
+
+//        var_dump($absen);
 
         if( is_null($absen) ) {
             $absen = new Absen();
 
             $absen->kehadiran = 'tidak';
-            $absen->tanggal = (new DateTime())->format(NORMAL_DATE);
+            $absen->tanggal = DateTime::createFromFormat('Y-m-d', $tanggal)->format(NORMAL_DATE);
 
             $this->absen()->save($absen);
         }

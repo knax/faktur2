@@ -66,7 +66,7 @@ class Keuntungan extends Model
 
         foreach ($listPembelian->get() as $pembelian) {
             foreach ($pembelian->detail()->get() as $pembelianDetail) {
-                $totalHarga += $pembelianDetail->unit * $pembelianDetail->barang()->harga;
+                $totalHarga += $pembelianDetail->unit * $pembelianDetail->barang->harga;
             }
         }
 
@@ -82,7 +82,7 @@ class Keuntungan extends Model
 
         foreach ($listPenjualan->get() as $penjualan) {
             foreach ($penjualan->detail as $penjualanDetail) {
-                $totalHargaModal += $penjualanDetail->unit * $penjualanDetail->barang()->harga;
+                $totalHargaModal += $penjualanDetail->unit * $penjualanDetail->barang->harga;
             }
         }
 

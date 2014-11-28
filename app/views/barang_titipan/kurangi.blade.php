@@ -12,21 +12,19 @@
 <div class="row">
 	<div class="col-md-12">
 
-		<form action="/barang_titipan/{{$barangTitipan->id}}" method="post">
-
-			<div class="form-group">
-				<label for="nama-penitip">Nama Penitip</label>
-				<p class="form-control-static" id="nama-penitip">{{$barangTitipan->nama_penitip}}</p>
-			</div>
+		<form action="/barang_titipan/{{$barangTitipanDetail->barangTitipan->id}}/{{$barangTitipanDetail->id}}"
+					method="post">
 
 			<div class="form-group">
 				<label for="nama-barang">Nama Barang</label>
-				<p class="form-control-static" id="nama-barang">{{$barangTitipan->nama_barang}}</p>
+
+				<p class="form-control-static" id="nama-barang">{{$barangTitipanDetail->nama}}</p>
 			</div>
 
 			<div class="form-group">
 				<label for="unit_sisa">Unit</label>
-				<p class="form-control-static" id="unit_sisa">{{$barangTitipan->unit}}</p>
+
+				<p class="form-control-static" id="unit_sisa">{{$barangTitipanDetail->unit}}</p>
 			</div>
 
 			<div class="form-group">

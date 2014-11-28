@@ -11,7 +11,7 @@
     <div class="form-group">
       <label for="nama-konsumen">Nama Konsumen</label>
 
-      <p id="nama-konsumen" class="form-control-static">{{$penjualan->pelanggan()->nama}}</p>
+      <p id="nama-konsumen" class="form-control-static">{{$penjualan->pelanggan->nama}}</p>
     </div>
   </div>
 </div>
@@ -42,7 +42,7 @@
       @foreach($penjualan->listBarangTerjual() as $key => $penjualanDetail)
       <tr>
         <td>{{$key + 1}}</td>
-        <td>{{$penjualanDetail->barang()->nama}}</td>
+        <td>{{$penjualanDetail->barang->nama}}</td>
         <td>{{toRupiah($penjualanDetail->harga)}}</td>
         <td>{{$penjualanDetail->unit}}</td>
         <td>{{toRupiah($penjualanDetail->harga * $penjualanDetail->unit)}}</td>

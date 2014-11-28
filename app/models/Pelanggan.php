@@ -20,6 +20,7 @@
  * @method static \Model hariIni()
  * @method static \Model tanggal($tanggal)
  * @method static \Model tanggalText($tanggal)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Penjualan[] $penjualan
  */
 class Pelanggan extends Model
 {
@@ -35,6 +36,13 @@ class Pelanggan extends Model
     public function pembayaran()
     {
         return $this->hasMany('PembayaranPiutang', 'id_pelanggan', 'id');
+    }
+
+    public function alamatFormatted()
+    {
+        $alamat = str_split($this->alamat, 30);
+
+        return $alamat;
     }
 
     public function piutang($tanggal = null)

@@ -14,7 +14,7 @@
  * @method static \Model tanggal($tanggal)
  * @method static \Model tanggalText($tanggal)
  * @property string $judul
- * @method static \Illuminate\Database\Query\Builder|\HakAkses whereJudul($value) 
+ * @method static \Illuminate\Database\Query\Builder|\HakAkses whereJudul($value)
  */
 class HakAkses extends Model
 {

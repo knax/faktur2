@@ -28,7 +28,7 @@ class KasirController extends \BaseController
         $penjualan->save();
 
         $totalHarga = 0;
-        foreach ($penjualan->detail()->get() as $detail) {
+        foreach ($penjualan->detail as $detail) {
             $totalHarga += $detail->unit * $detail->harga;
         }
 

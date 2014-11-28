@@ -36,6 +36,8 @@ Route::group(['prefix' => 'kasir'], function () {
 Route::group(['prefix' => 'marketing'], function () {
     Route::get('jual', ['as' => 'marketing.jual.form', 'uses' => 'MarketingController@jualBarangForm']);
     Route::post('jual', ['as' => 'marketing.jual', 'uses' => 'MarketingController@jualBarang']);
+    Route::get('{id}/print/raw', ['as' => 'marketing.print.raw', 'uses' => 'MarketingController@printRaw']);
+    Route::get('{id}/print', ['as' => 'marketing.print', 'uses' => 'MarketingController@printFaktur']);
 });
 
 Route::group(['prefix' => 'pelanggan'], function () {
@@ -78,21 +80,24 @@ Route::get('logout', ['as' => 'auth.logout', 'uses' => 'LoginController@logout']
 Route::group(['prefix' => 'karyawan'], function () {
     Route::get('', ['as' => 'karyawan.list', 'uses' => 'KaryawanController@listKaryawan']);
     Route::group(['prefix' => 'absen'], function () {
+        Route::get('{id}', ['as' => 'karyawan.absen.detail', 'uses' => 'KaryawanController@absenKaryawanDetail']);
         Route::get('', ['as' => 'karyawan.absen.list', 'uses' => 'KaryawanController@listAbsen']);
         Route::get('{id}/{tipe}/{tanggal}', ['as' => 'karyawan.absen', 'uses' => 'KaryawanController@absenKaryawan'])
              ->where('id', '[0-9]+')
              ->where('tipe', '(masuk|setengah_hari|tidak)');
     });
     Route::get('lemburan', ['as' => 'karyawan.lemburan.list', 'uses' => 'KaryawanController@listLemburan']);
-    Route::get('{id}', ['as' => 'karyawan.detail', 'uses' => 'KaryawanController@detailKaryawan']);
+//    Route::get('{id}', ['as' => 'karyawan.detail', 'uses' => 'KaryawanController@detailKaryawan']);
+    Route::get('{id}', ['as' => 'karyawan.absen.detail', 'uses' => 'KaryawanController@absenKaryawanDetail']);
 });
 
 Route::group(['prefix' => 'barang_titipan'], function () {
     Route::get('', ['as' => 'barang_titipan.list', 'uses' => 'BarangTitipanController@listBarangTitipan']);
     Route::get('buat', ['as' => 'barang_titipan.buat.form', 'uses' => 'BarangTitipanController@buatBarangTitipanForm']);
     Route::post('', ['as' => 'barang_titipan.buat', 'uses' => 'BarangTitipanController@buatBarangTitipan']);
-    Route::get('{id}', ['as' => 'barang_titipan.kurangi.form', 'uses' => 'BarangTitipanController@kurangiBarangTitipanForm']);
-    Route::post('{id}', ['as' => 'barang_titipan.kurangi', 'uses' => 'BarangTitipanController@kurangiBarangTitipan']);
+    Route::get('{id}', ['as' => 'barang_titipan.detail', 'uses' => 'BarangTitipanController@barangTitipan']);
+    Route::get('{id}/{id_barang}', ['as' => 'barang_titipan.kurangi.form', 'uses' => 'BarangTitipanController@kurangiBarangTitipanForm']);
+    Route::post('{id}/{id_barang}', ['as' => 'barang_titipan.kurangi', 'uses' => 'BarangTitipanController@kurangiBarangTitipan']);
 });
 
 Route::get('test', function () {

@@ -14,7 +14,7 @@
       @foreach($daftarPenjualan as $penjualan)
       <tr data-id="{{$penjualan->id}}">
         <td>{{$penjualan->id}}</td>
-        <td>{{$penjualan->pelanggan()->nama}}</td>
+        <td>{{$penjualan->pelanggan->nama}}</td>
         <td>{{$penjualan->totalHarga()}}</td>
       </tr>
       @endforeach

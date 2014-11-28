@@ -5,12 +5,9 @@
  *
  * @property integer $id
  * @property string $nama_penitip
- * @property string $nama_barang
- * @property integer $unit
+ * @property-read \Illuminate\Database\Eloquent\Collection|\BarangTitipanDetail[] $detail
  * @method static \Illuminate\Database\Query\Builder|\BarangTitipan whereId($value) 
  * @method static \Illuminate\Database\Query\Builder|\BarangTitipan whereNamaPenitip($value) 
- * @method static \Illuminate\Database\Query\Builder|\BarangTitipan whereNamaBarang($value) 
- * @method static \Illuminate\Database\Query\Builder|\BarangTitipan whereUnit($value) 
  * @method static \Model terakhir() 
  * @method static \Model hariIni() 
  * @method static \Model tanggal($tanggal) 
@@ -22,4 +19,8 @@ class BarangTitipan extends Model
     protected $table = 'barang_titipan';
     protected $guarded = ['id'];
 
+    public function detail()
+    {
+        return $this->hasMany('BarangTitipanDetail', 'id_barang_titipan', 'id');
+    }
 }

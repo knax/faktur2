@@ -12,16 +12,16 @@
  * @property-read \Pelanggan $pelanggan
  * @property-read \Illuminate\Database\Eloquent\Collection|\PenjualanDetail[] $listBarangTerjual
  * @property-read \Illuminate\Database\Eloquent\Collection|\PenjualanDetail[] $detail
- * @method static \Illuminate\Database\Query\Builder|\Penjualan whereId($value) 
- * @method static \Illuminate\Database\Query\Builder|\Penjualan whereTanggalPenjualan($value) 
- * @method static \Illuminate\Database\Query\Builder|\Penjualan whereSudahDibayar($value) 
- * @method static \Illuminate\Database\Query\Builder|\Penjualan whereMetodePembayaran($value) 
- * @method static \Illuminate\Database\Query\Builder|\Penjualan whereTanggalPembayaran($value) 
- * @method static \Illuminate\Database\Query\Builder|\Penjualan whereIdPelanggan($value) 
- * @method static \Model terakhir() 
- * @method static \Model hariIni() 
- * @method static \Model tanggal($tanggal) 
- * @method static \Model tanggalText($tanggal) 
+ * @method static \Illuminate\Database\Query\Builder|\Penjualan whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\Penjualan whereTanggalPenjualan($value)
+ * @method static \Illuminate\Database\Query\Builder|\Penjualan whereSudahDibayar($value)
+ * @method static \Illuminate\Database\Query\Builder|\Penjualan whereMetodePembayaran($value)
+ * @method static \Illuminate\Database\Query\Builder|\Penjualan whereTanggalPembayaran($value)
+ * @method static \Illuminate\Database\Query\Builder|\Penjualan whereIdPelanggan($value)
+ * @method static \Model terakhir()
+ * @method static \Model hariIni()
+ * @method static \Model tanggal($tanggal)
+ * @method static \Model tanggalText($tanggal)
  */
 class Penjualan extends Model
 {
@@ -36,16 +36,16 @@ class Penjualan extends Model
 
     public function pelanggan()
     {
-        return $this->belongsTo('Pelanggan', 'id_pelanggan', 'id')->first();
+        return $this->belongsTo('Pelanggan', 'id_pelanggan', 'id');
     }
 
     public function totalHarga()
     {
         $totalHarga = 0;
-        foreach ($this->listBarangTerjual() as $penjualanDetail) {
-            $totalHarga += $penjualanDetail->unit * $penjualanDetail->harga;
-        }
 
+        foreach($this->detail as $detail) {
+            $totalHarga += $detail->harga * $detail->unit;
+        }
         return $totalHarga;
     }
 

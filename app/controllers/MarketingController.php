@@ -1,5 +1,7 @@
 <?php
 
+use mikehaertl\wkhtmlto\Pdf;
+
 class MarketingController extends \BaseController
 {
 
@@ -46,6 +48,26 @@ class MarketingController extends \BaseController
             $penjualanDetail->save();
         }
 
-        return Redirect::to('/');
+        return Redirect::to(URL::route('marketing.print', ['id' => $penjualan->id]));
+    }
+
+    public function printRaw($id){
+        $penjualan = Penjualan::findOrFail($id);
+
+        return View::make('penjualan.marketing.print.raw')->with('penjualan', $penjualan);
+    }
+
+    public function printFaktur($id){
+        $penjualan = Penjualan::findOrFail($id);
+
+        $url = URL::route('marketing.print.raw', ['id' => $id]);
+
+        $binary = '/home/knax/PhpstormProjects/faktur2/vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64';
+
+        $snappy = new Knp\Snappy\Pdf($binary);
+        $response = Response::make($snappy->getOutput($url));
+        $response->header('Content-Type', 'application/pdf');
+        $response->header('Content-Disposition', 'attachment; filename="' . $penjualan->id . '.pdf"');
+        return $response;
     }
 }

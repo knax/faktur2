@@ -16,8 +16,6 @@ class CreateBarangTitipan extends Migration {
 		{
 			$table->increments('id');
 			$table->string('nama_penitip');
-			$table->string('nama_barang');
-			$table->integer('unit')->unsigned();
 		});
 	}
 

@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 class KaryawanController extends \BaseController
 {
 
@@ -27,33 +29,43 @@ class KaryawanController extends \BaseController
             $tanggal = DateTime::createFromFormat('Y-m-d', $tanggal);
         }
 
-        //        var_dump($tanggal);
+        //                var_dump($tanggal);
 
-        $listKaryawan = Karyawan::whereHas('absen', function ($q) use ($tanggal) {
-            $q->where('tanggal', '=', $tanggal->format('Y-m-d'));
-        })->get();
+        //        $listKaryawan = Karyawan::whereHas('absen', function ($q) use ($tanggal) {
+        //            $q->where('tanggal', '=', $tanggal->format('Y-m-d'));
+        //        })->get();
+        $listKaryawan = Karyawan::all();
+
+//        var_dump($listKaryawan);
 
         $formatter = new IntlDateFormatter('id_ID', IntlDateFormatter::FULL, IntlDateFormatter::FULL);
         $formatter->setPattern('EEEE, d MMMM yyyy');
 
-        return View::make('karyawan.absen.index')
-                   ->with('listKaryawan', $listKaryawan)
-                   ->with('tanggalRaw', $tanggal->format(NORMAL_DATE))
-                   ->with('tanggal', $formatter->format($tanggal));
+                return View::make('karyawan.absen.index')
+                           ->with('listKaryawan', $listKaryawan)
+                           ->with('tanggalRaw', $tanggal->format(NORMAL_DATE))
+                           ->with('tanggal', $formatter->format($tanggal));
     }
 
     public function absenKaryawan($id, $tipe, $tanggal)
     {
         $karyawan = Karyawan::findOrFail($id);
 
-        // TODO tanggal absen sebelumnya
         $absen = $karyawan->absen()->tanggalText($tanggal)->first();
-        //        var_dump($absen);
         $absen->kehadiran = $tipe;
         $absen->save();
 
         //        var_dump($tanggal);
         return Redirect::to('/karyawan/absen?tanggal=' . $tanggal);
+    }
+
+    public function absenKaryawanDetail($id)
+    {
+        $karyawan = Karyawan::findOrFail($id);
+
+        $listAbsen = $karyawan->absen()->where('tanggal', '>', Carbon::now()->startOfMonth())->get();
+
+        return View::make('karyawan.absen.detail')->with('listAbsen', $listAbsen)->with('karyawan', $karyawan);
     }
 
     public function listLemburan()
