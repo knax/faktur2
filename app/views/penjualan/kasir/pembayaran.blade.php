@@ -37,6 +37,18 @@
         <td colspan="4" class="text-right"><strong>Total Harga :</strong></td>
         <td>{{toRupiah($penjualan->totalHarga())}}</td>
       </tr>
+      <tr>
+        <td colspan="4" class="text-right">Diskon :</td>
+        <td>{{toRupiah($penjualan->diskon)}}</td>
+      </tr>
+      <tr>
+        <td colspan="4" class="text-right">Ongkos Kirim :</td>
+        <td>{{toRupiah($penjualan->ongkir)}}</td>
+      </tr>
+      <tr>
+        <td colspan="4" class="text-right"><strong>Grand Total :</strong></td>
+        <td>{{toRupiah($penjualan->grandTotal())}}</td>
+      </tr>
       </tfoot>
       <tbody>
       @foreach($penjualan->listBarangTerjual() as $key => $penjualanDetail)
@@ -61,7 +73,7 @@
 <hr/>
 <div class="row">
   <div class="col-md-12">
-    <form action="/penjualan/kasir/{{$penjualan->id}}" method="POST">
+    <form action="/kasir/{{$penjualan->id}}" method="POST">
       <div class="radio">
         <label>
           <input type="radio" name="metode_pembayaran" id="tunai" value="tunai" checked>

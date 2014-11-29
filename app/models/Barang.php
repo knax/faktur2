@@ -20,6 +20,7 @@
  * @method static \Model hariIni()
  * @method static \Model tanggal($tanggal)
  * @method static \Model tanggalText($tanggal)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\SuratJalanDetail[] $suratJalanDetail
  */
 class Barang extends Model
 {
@@ -136,33 +137,6 @@ class Barang extends Model
 
     }
 
-    /*    public function modifikasiStok($banyaknya)
-        {
-            $hariIni = new DateTime();
-
-            $stok = $this->stok($hariIni->format(NORMAL_DATE));
-
-            if( is_null($stok) ) {
-                $stok = new Stok();
-                $stok->tanggal = $hariIni->format(NORMAL_DATE);
-                $stok->stok = $this->stok($hariIni->modify('-1 days')->format(NORMAL_DATE));
-
-                $this->stok()->save($stok);
-            }
-
-            $stok->stok = $stok->stok - $banyaknya;
-
-            $stok->save();
-
-            $stokPerpindahan = new StokPerpindahan();
-
-            $stokPerpindahan->id_stok = $stok->id;
-            $stokPerpindahan->unit = 0 - $banyaknya;
-
-            $stokPerpindahan->save();
-
-        }*/
-
     public function stok()
     {
         return $this->hasMany('Stok', 'id_barang', 'id');
@@ -192,14 +166,9 @@ class Barang extends Model
         return $stok;
     }
 
-    //
-    //    public function stok($tanggal = null)
-    //    {
-    //        if( is_null($tanggal) ) {
-    //            $tanggal = (new DateTime())->format('Y-m-d');
-    //        }
-    //
-    //        return $this->hasMany('Stok', 'id_barang', 'id')->where('tanggal', '=', $tanggal)->first();
-    //
-    //    }
+    public function suratJalanDetail()
+    {
+        return $this->hasMany('SuratJalanDetail', 'id_barang', 'id');
+    }
+
 }

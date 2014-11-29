@@ -13,14 +13,12 @@
   <div class="col-md-12">
     <table class="table table-bordered table-clickable">
       <thead>
-      <th>Nomor</th>
-      <th>Nama Penitip</th>
+      <th>Nomor Faktur</th>
       </thead>
       <tbody>
       @foreach($listBarangTitipan as $barangTitipan)
       <tr data-id="{{$barangTitipan->id}}">
-        <td>{{$barangTitipan->id}}</td>
-        <td>{{$barangTitipan->nama_penitip}}</td>
+        <td>{{$barangTitipan->penjualan->id}}</td>
       </tr>
       @endforeach
       </tbody>

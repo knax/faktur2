@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateBarangTitipanDetail extends Migration {
+class CreateSuratJalan extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,13 +12,13 @@ class CreateBarangTitipanDetail extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('barang_titipan_detail', function(Blueprint $table)
+		Schema::create('surat_jalan', function(Blueprint $table)
 		{
 			$table->increments('id');
-            $table->integer('unit')->unsigned();
-            $table->integer('id_barang')->unsigned();
+            $table->string('nama');
+            $table->string('penulis');
+            $table->string('alamat');
             $table->integer('id_barang_titipan')->unsigned();
-            $table->foreign('id_barang')->references('id')->on('barang');
             $table->foreign('id_barang_titipan')->references('id')->on('barang_titipan');
 		});
 	}
@@ -31,7 +31,7 @@ class CreateBarangTitipanDetail extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('barang_titipan_detail');
+		Schema::drop('surat_jalan');
 	}
 
 }

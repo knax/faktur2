@@ -79,6 +79,7 @@ Route::get('logout', ['as' => 'auth.logout', 'uses' => 'LoginController@logout']
 
 Route::group(['prefix' => 'karyawan'], function () {
     Route::get('', ['as' => 'karyawan.list', 'uses' => 'KaryawanController@listKaryawan']);
+    Route::get('buat', ['as' => 'karyawan.buat', 'uses' => 'KaryawanController@buatKaryawanForm']);
     Route::group(['prefix' => 'absen'], function () {
         Route::get('{id}', ['as' => 'karyawan.absen.detail', 'uses' => 'KaryawanController@absenKaryawanDetail']);
         Route::get('', ['as' => 'karyawan.absen.list', 'uses' => 'KaryawanController@listAbsen']);
@@ -93,11 +94,13 @@ Route::group(['prefix' => 'karyawan'], function () {
 
 Route::group(['prefix' => 'barang_titipan'], function () {
     Route::get('', ['as' => 'barang_titipan.list', 'uses' => 'BarangTitipanController@listBarangTitipan']);
-    Route::get('buat', ['as' => 'barang_titipan.buat.form', 'uses' => 'BarangTitipanController@buatBarangTitipanForm']);
-    Route::post('', ['as' => 'barang_titipan.buat', 'uses' => 'BarangTitipanController@buatBarangTitipan']);
     Route::get('{id}', ['as' => 'barang_titipan.detail', 'uses' => 'BarangTitipanController@barangTitipan']);
-    Route::get('{id}/{id_barang}', ['as' => 'barang_titipan.kurangi.form', 'uses' => 'BarangTitipanController@kurangiBarangTitipanForm']);
-    Route::post('{id}/{id_barang}', ['as' => 'barang_titipan.kurangi', 'uses' => 'BarangTitipanController@kurangiBarangTitipan']);
+    Route::get('{id}/surat_jalan', ['as' => 'barang_titipan.surat_jalan_form', 'uses' => 'BarangTitipanController@buatSuratJalanForm']);
+    Route::post('{id}/surat_jalan', ['as' => 'barang_titipan.surat_jalan', 'uses' => 'BarangTitipanController@buatSuratJalan']);
+    Route::group(['prefix' => 'surat_jalan'], function(){
+        Route::get('{id}/print/raw', ['as' => 'barang_titipan.surat_jalan.print.raw', 'uses' => 'BarangTitipanController@printSuratJalanRaw']);
+        Route::get('{id}/print', ['as' => 'barang_titipan.surat_jalan.print', 'uses' => 'BarangTitipanController@printSuratJalan']);
+    });
 });
 
 Route::get('test', function () {

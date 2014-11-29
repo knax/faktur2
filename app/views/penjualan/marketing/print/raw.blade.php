@@ -7,23 +7,33 @@
 	<style>
 		* {
 			box-sizing: border-box;
-			font-size: 11pt;
+			font-family: 'Arial';
+			font-size: 10pt;
+		}
+
+		p#notice {
+			margin-top: 0px;
 		}
 
 		div#print-container {
 			position: relative;
-			margin: 10mm;
+			margin-top: 0px;
+			margin-left: 10mm;
+			margin-right: 10mm;
 			/*height: 297mm;*/
-			height: 277mm;
-			width: 185mm;
+			/*height: 277mm;*/
+			/*width: 185mm;*/
+			height: 5.51in;
+			width: 8.50in;
 		}
 
 		header {
-			text-align: center;
+			font-size: 10pt;
 		}
 
 		table#atas {
-			margin-top: 50px;
+			margin-top: -10px;
+			width: 100%;
 		}
 
 		.spacer {
@@ -31,43 +41,74 @@
 		}
 
 		table#main {
+			margin-top: 10px;
 			width: 100%;
+			text-align: center;
 		}
+
 		table#main td {
 			padding: 5px;
+			font-size: 10pt;
+		}
+
+		table#main tr {
+			padding: 5px;
+			font-size: 10pt;
+		}
+
+
+		div#tanda-tangan {
+			text-align: right;
+		}
+
+		span#hormat-kami {
+			margin-bottom: 20px;
+		}
+
+		span {
+			display: block;
+		}
+
+		#faktur-text {
+			font-size: 20pt;
+			text-align: center;
+		}
+
+		.border {
+			border: 1px solid black;
 		}
 	</style>
 </head>
 <body>
 <div id="print-container">
 	<header>
-		<h2>Mega Beton</h2>
+		<span><strong>Mega Beton</strong></span>
 		<span> Jl.Raya Caman No.34, Jatibening, Bekasi, Telp.021-84971212</span>
 	</header>
+	<h1 id="faktur-text">Faktur</h1>
 	<table id="atas">
 		<tbody>
 		<tr>
+			<td>Nama</td>
+			<td>:</td>
+			<td>{{$penjualan->pelanggan->nama}}</td>
 			<td>No</td>
 			<td>:</td>
 			<td>{{$penjualan->id}}</td>
-			<td class="spacer">&nbsp;</td>
-			<td>Kepada Yth:</td>
 		</tr>
 		<tr>
-			<td>Pelanggan</td>
+			<td>Alamat</td>
 			<td>:</td>
-			<td>{{$penjualan->pelanggan->nama}}</td>
-			<td class="spacer">&nbsp;</td>
-			<td rowspan="4">
-				<p>
-					@foreach($penjualan->pelanggan->alamatFormatted() as $alamat)
-					{{$alamat}}
-					<br/>
-					@endforeach
-				</p>
-			</td>
+			<td>{{$penjualan->pelanggan->alamat}}</td>
+
+			<td>Nama Marketing</td>
+			<td>:</td>
+			<td>{{$penjualan->nama_marketing}}</td>
 		</tr>
 		<tr>
+			<td>Nomor Telepon</td>
+			<td>:</td>
+			<td>{{$penjualan->pelanggan->nomor_telepon}}</td>
 			<td>Tanggal</td>
 			<td>:</td>
 			<td>{{$penjualan->tanggal_penjualan}}</td>
@@ -75,30 +116,58 @@
 		</tbody>
 	</table>
 
-	<table id="main" border="1">
+	<table id="main">
 		<thead>
-		<th>Nomor</th>
-		<th>Nama Barang</th>
-		<th>Harga Satuan</th>
-		<th>Kuantitas</th>
-		<th>Harga</th>
+		<th class="border">Nomor</th>
+		<th class="border">Nama Barang</th>
+		<th class="border">Harga Satuan</th>
+		<th class="border">Kuantitas</th>
+		<th class="border">Harga</th>
 		</thead>
 		<tfoot>
-		<td colspan="4" style="text-align: right"><strong>Total Harga:</strong></td>
-		<td>{{toRupiah($penjualan->totalHarga())}}</td>
+		<tr>
+			<td colspan="3" class="noborder">&nbsp;</td>
+			<td class="border" style="text-align: right"><strong>Total Harga:</strong></td>
+			<td class="border">{{toRupiah($penjualan->totalHarga())}}</td>
+		</tr>
+		<tr>
+			<td colspan="3" class="noborder">&nbsp;</td>
+			<td class="border" style="text-align: right">Diskon:</td>
+			<td class="border">{{toRupiah($penjualan->diskon)}}</td>
+		</tr>
+		<tr>
+			<td colspan="3" class="noborder">&nbsp;</td>
+			<td class="border" style="text-align: right">Ongkos Kirim:</td>
+			<td class="border">{{toRupiah($penjualan->ongkir)}}</td>
+		</tr>
+		<tr>
+			<td colspan="3" class="noborder">&nbsp;</td>
+			<td class="border" style="text-align: right"><strong>Grand Total:</strong></td>
+			<td class="border">{{toRupiah($penjualan->grandTotal())}}</td>
+		</tr>
 		</tfoot>
 		<tbody>
 		@foreach($penjualan->detail as $key => $detail)
 		<tr>
-			<td>{{$key + 1}}</td>
-			<td>{{$detail->barang->nama}}</td>
-			<td>{{$detail->harga}}</td>
-			<td>{{$detail->unit}}</td>
-			<td>{{toRupiah($detail->harga * $detail->unit)}}</td>
+			<td class="border">{{$key + 1}}</td>
+			<td class="border">{{$detail->barang->nama}}</td>
+			<td class="border">{{toRupiah($detail->harga)}}</td>
+			<td class="border">{{$detail->unit}}</td>
+			<td class="border">{{toRupiah($detail->harga * $detail->unit)}}</td>
 		</tr>
 		@endforeach
 		</tbody>
 	</table>
+	<div id="footer">
+		<p id="notice">*Mohon barang dihitung dengan teliti, barang yang sudah dibeli tidak dapat dikembalikan</p>
+
+		<div id="tanda-tangan">
+			<p>
+				<span id="hormat-kami">Hormat Kami</span>
+				<span id="nama-marketing">{{$penjualan->nama_marketing}}</span>
+			</p>
+		</div>
+	</div>
 </div>
 <!-- /#print-container -->
 

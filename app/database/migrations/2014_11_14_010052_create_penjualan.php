@@ -17,6 +17,9 @@ class CreatePenjualan extends Migration
             $table->increments('id');
             $table->date('tanggal_penjualan');
             $table->boolean('sudah_dibayar');
+            $table->integer('diskon');
+            $table->bigInteger('ongkir');
+            $table->string('nama_marketing');
             $table->string('metode_pembayaran')->nullable();
             $table->date('tanggal_pembayaran')->nullable();
             $table->integer('id_pelanggan')->unsigned();

@@ -50,7 +50,7 @@ class Pelanggan extends Model
         if($tanggal == null) {
             $tanggal = (new DateTime())->format('Y-m-d');
         }
-        return $this->hasMany('Piutang', 'id_pelanggan', 'id')->where('tanggal', '=', $tanggal)->first();
+        return $this->hasMany('Piutang', 'id_pelanggan', 'id')->tanggalText($tanggal)->first();
     }
 
 

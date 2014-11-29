@@ -15,7 +15,7 @@
       <tr data-id="{{$penjualan->id}}">
         <td>{{$penjualan->id}}</td>
         <td>{{$penjualan->pelanggan->nama}}</td>
-        <td>{{$penjualan->totalHarga()}}</td>
+        <td>{{$penjualan->grandTotal()}}</td>
       </tr>
       @endforeach
       </tbody>

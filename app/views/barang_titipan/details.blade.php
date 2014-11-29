@@ -2,7 +2,7 @@
 @section('content')
 <div class="row">
 	<div class="col-md-12">
-		<h2>Nama penitip {{$barangTitipan->nama_penitip}}</h2>
+		<h2>Nomor faktur {{$barangTitipan->penjualan->id}}</h2>
 	</div>
 </div>
 <hr/>
@@ -14,7 +14,7 @@
 <hr/>
 <div class="row">
 	<div class="col-md-12">
-		<table class="table table-bordered table-clickable">
+		<table class="table table-bordered">
 			<thead>
 			<th>Nomor</th>
 			<th>Nama Barang</th>
@@ -24,12 +24,18 @@
 			@foreach($barangTitipan->detail as $key => $barangTitipanDetail)
 			<tr data-id="{{$barangTitipanDetail->id}}">
 				<td>{{$key + 1}}</td>
-				<td>{{$barangTitipanDetail->nama}}</td>
+				<td>{{$barangTitipanDetail->barang->nama}}</td>
 				<td>{{$barangTitipanDetail->unit}}</td>
 			</tr>
 			@endforeach
 			</tbody>
 		</table>
+	</div>
+</div>
+<hr/>
+<div class="row">
+	<div class="col-md-12">
+		<a href="{{URL::route('barang_titipan.surat_jalan_form', ['id' => $barangTitipan->id ])}}" class="btn btn-primary">Buat Surat Jalan</a>
 	</div>
 </div>
 @stop

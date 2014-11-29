@@ -1,7 +1,5 @@
 <?php
 
-use mikehaertl\wkhtmlto\Pdf;
-
 class MarketingController extends \BaseController
 {
 
@@ -20,11 +18,22 @@ class MarketingController extends \BaseController
 
         $jenisKonsumen = Input::get('jenis_konsumen');
         if( !$jenisKonsumen ) {
-            $penjualan->id_pelanggan = 1;
+            $pelanggan = new Pelanggan();
+
+            $pelanggan->nama = Input::get('nama');
+            $pelanggan->alamat = Input::get('alamat');
+            $pelanggan->nomor_telepon = Input::get('nomor_telepon');
+
+            $pelanggan->save();
+
+            $penjualan->id_pelanggan = $pelanggan->id;
         } else {
             $penjualan->id_pelanggan = Input::get('id_konsumen');
         }
         $penjualan->sudah_dibayar = false;
+        $penjualan->nama_marketing = Auth::user()->full_name;
+        $penjualan->diskon = Input::get('diskon');
+        $penjualan->ongkir = Input::get('ongkir');
         $penjualan->tanggal_penjualan = (new DateTime())->format('Y-m-d');
 
         $penjualan->save();
@@ -65,9 +74,10 @@ class MarketingController extends \BaseController
         $binary = '/home/knax/PhpstormProjects/faktur2/vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64';
 
         $snappy = new Knp\Snappy\Pdf($binary);
+        $snappy->setOption('margin-top', '2mm');
         $response = Response::make($snappy->getOutput($url));
         $response->header('Content-Type', 'application/pdf');
-        $response->header('Content-Disposition', 'attachment; filename="' . $penjualan->id . '.pdf"');
+//        $response->header('Content-Disposition', 'attachment; filename="' . $penjualan->id . '.pdf"');
         return $response;
     }
 }

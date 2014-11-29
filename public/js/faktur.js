@@ -11,17 +11,24 @@ var Faktur = {
 
         var harga = Faktur.toRupiah($('input#harga-satuan').val() * $('input#unit').val());
 
+        Faktur.inputToTable($inputs, $row, id);
+
         $row.append($('<td/>').addClass('harga-barang').html(harga));
 
         $row.appendTo($tableBody);
-
-        Faktur.inputToTable($inputs, $row, id);
 
         var totalHarga = 0;
         $('td.harga-barang').each(function () {
             totalHarga = totalHarga + Math.floor($(this).html().replace(/[^\/\d]/g, ''));
         });
         $('td#total-harga-barang').html(Faktur.toRupiah(totalHarga));
+
+        var totalDiskon = parseInt($('input#diskon').val());
+        $('td#diskon-text').html(Faktur.toRupiah(totalDiskon));
+        var ongkir = parseInt($('input#ongkir').val());
+        $('td#ongkir-text').html(Faktur.toRupiah(ongkir));
+
+        $('td#grand-total').html(Faktur.toRupiah(parseInt(totalHarga) - parseInt(totalDiskon) + parseInt(ongkir)));
     },
     tambahDataKeTabelPenitipan: function ($tableBody, $inputs) {
 
@@ -122,6 +129,24 @@ $('button#tambah').click(function (e) {
     $('span#range-harga').parent().addClass('hidden');
 });
 
+if ($tableBody) {
+    var changeDiskon = function() {
+        var totalHarga = 0;
+        $('td.harga-barang').each(function () {
+            totalHarga = totalHarga + Math.floor($(this).html().replace(/[^\/\d]/g, ''));
+        });
+
+        var totalDiskon = parseInt($('input#diskon').val());
+        $('td#diskon-text').html(Faktur.toRupiah(totalDiskon));
+        var ongkir = parseInt($('input#ongkir').val());
+        $('td#ongkir-text').html(Faktur.toRupiah(ongkir));
+
+        $('td#grand-total').html(Faktur.toRupiah(totalHarga - totalDiskon + ongkir));
+    }
+    $('input#diskon').change(changeDiskon);
+    $('input#ongkir').change(changeDiskon);
+}
+
 var $tableBodyPembelian = $('table#data-pembelian > tbody');
 var $inputsPembelian = $('.data-pembelian');
 $('button#tambah-pembelian').click(function (e) {
@@ -179,6 +204,21 @@ $selectBarang.change(function (e) {
     $spanStokSisa.parent().removeClass('hidden');
 });
 // End set stok barang
+
+// stok barang penitipan
+var $selectBarangPenitipan = $('select#barang-penitipan');
+
+var $spanUnitSisa = $('span#unit-sisa');
+var stokBarangTerpilih = $selectBarangPenitipan.find(':selected').data('unit-sisa');
+$spanUnitSisa.html(stokBarangTerpilih);
+$spanUnitSisa.parent().removeClass('hidden');
+
+$selectBarangPenitipan.change(function (e) {
+    stokBarangTerpilih = $selectBarangPenitipan.find(':selected').data('unit-sisa');
+    $spanUnitSisa.html(stokBarangTerpilih);
+    $spanUnitSisa.parent().removeClass('hidden');
+});
+// end
 
 // Tampilkan harga satuan
 

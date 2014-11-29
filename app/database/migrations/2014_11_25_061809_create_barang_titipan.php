@@ -15,7 +15,9 @@ class CreateBarangTitipan extends Migration {
 		Schema::create('barang_titipan', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('nama_penitip');
+            $table->boolean('diambilSemua')->default(false);
+			$table->integer('id_penjualan')->unsigned();
+            $table->foreign('id_penjualan')->references('id')->on('penjualan');
 		});
 	}
 

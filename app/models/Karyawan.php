@@ -28,8 +28,6 @@ class Karyawan extends Model
             $absen = $this->absen()->hariIni()->first();
         }
 
-//        var_dump($absen);
-
         if( is_null($absen) ) {
             $absen = new Absen();
 

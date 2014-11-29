@@ -22,6 +22,7 @@
  * @method static \Model hariIni()
  * @method static \Model tanggal($tanggal)
  * @method static \Model tanggalText($tanggal)
+ * @property-read \BarangTitipan $barangTitipan
  */
 class Penjualan extends Model
 {
@@ -49,6 +50,15 @@ class Penjualan extends Model
         return $totalHarga;
     }
 
+    public function grandTotal()
+    {
+        $totalHarga = $this->totalHarga();
+
+        $grandTotal = $totalHarga + $this->ongkir - $this->diskon;
+
+        return $grandTotal;
+    }
+
     public function listBarangTerjual()
     {
         return $this->hasMany('PenjualanDetail', 'id_penjualan', 'id')->get();
@@ -62,5 +72,10 @@ class Penjualan extends Model
     public function detail()
     {
         return $this->hasMany('PenjualanDetail', 'id_penjualan', 'id');
+    }
+
+    public function barangTitipan()
+    {
+        return $this->hasOne('BarangTitipan', 'id_penjualan', 'id');
     }
 }

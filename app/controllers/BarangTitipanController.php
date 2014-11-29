@@ -10,11 +10,6 @@ class BarangTitipanController extends BaseController
         return View::make('barang_titipan.index')->with('listBarangTitipan', $listBarangTitipan);
     }
 
-    public function buatBarangTitipanForm()
-    {
-        return View::make('barang_titipan.create');
-    }
-
     public function barangTitipan($id)
     {
         $barangTitipan = BarangTitipan::findOrFail($id);
@@ -22,43 +17,68 @@ class BarangTitipanController extends BaseController
         return View::make('barang_titipan.details')->with('barangTitipan', $barangTitipan);
     }
 
-
-    public function buatBarangTitipan()
+    public function buatSuratJalanForm($id)
     {
-        $barangTitipan = new BarangTitipan();
+        $barangTitipan = BarangTitipan::findOrFail($id);
 
-        $barangTitipan->nama_penitip = Input::get('nama_penitip');
+        return View::make('barang_titipan.surat_jalan')->with('barangTitipan', $barangTitipan);
+    }
 
-        $barangTitipan->save();
+    public function buatSuratJalan($id)
+    {
+        $barangTitipan = BarangTitipan::findOrFail($id);
 
-        $listBarangTitipan = Input::get('barang');
+        $suratJalan = new SuratJalan();
 
-        foreach ($listBarangTitipan as $detail) {
-            $barangTitipanDetail = new BarangTitipanDetail();
+        $suratJalan->alamat = Input::get('alamat');
+        $suratJalan->penulis = Input::get('penulis');
+        $suratJalan->nama = Input::get('nama');
 
-            $barangTitipanDetail->id_barang_titipan = $barangTitipan->id;
-            $barangTitipanDetail->nama = $detail['nama-barang'];
-            $barangTitipanDetail->unit = $detail['unit'];
+        $barangTitipan->suratJalan()->save($suratJalan);
+
+        foreach (Input::get('barang') as $detail) {
+            $suratJalanDetail = new SuratJalanDetail();
+
+            $barangTitipanDetail = BarangTitipanDetail::findOrFail($detail['id_barang_penitipan_detail']);
+
+            $suratJalanDetail->unit = $detail['unit'];
+            $suratJalanDetail->id_barang = $barangTitipanDetail->barang->id;
+            $suratJalanDetail->id_surat_jalan = $suratJalan->id;
+            $suratJalanDetail->save();
+
+            //            $barangTitipanDetail->barang->suratJalanDetail()->save($suratJalanDetail);
+
+            $barangTitipanDetail->kurangiUnit($detail['unit']);
 
             $barangTitipanDetail->save();
         }
 
-        return Redirect::to('/');
+        //        var_dump(Input::all());
+        return Redirect::route('barang_titipan.surat_jalan.print', ['id' => $suratJalan->id]);
+//                return View::make('barang_titipan.surat_jalan')->with('barangTitipan', $barangTitipan);
     }
 
-    public function kurangiBarangTitipanForm($id, $id_barang)
+    public function printSuratJalanRaw($id)
     {
-        return View::make('barang_titipan.kurangi')->with('barangTitipanDetail', BarangTitipanDetail::findOrFail($id_barang));
+        $suratJalan = SuratJalan::findOrFail($id);
+
+        return View::make('barang_titipan.surat_jalan.print.raw')->with('suratJalan', $suratJalan);
     }
 
-    public function kurangiBarangTitipan($id, $id_barang)
+    public function printSuratJalan($id)
     {
-        $barangTitipanDetail = BarangTitipanDetail::findOrFail($id_barang);
+        $penjualan = SuratJalan::findOrFail($id);
 
-        $barangTitipanDetail->unit = $barangTitipanDetail->unit - Input::get('unit');
+        $url = URL::route('barang_titipan.surat_jalan.print.raw', ['id' => $id]);
 
-        $barangTitipanDetail->save();
+        $binary = '/home/knax/PhpstormProjects/faktur2/vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64';
 
-        return Redirect::to('/');
+        $snappy = new Knp\Snappy\Pdf($binary);
+        $response = Response::make($snappy->getOutput($url));
+        $response->header('Content-Type', 'application/pdf');
+//        $response->header('Content-Disposition', 'attachment; filename="' . $penjualan->id . '.pdf"');
+
+        return $response;
     }
+
 }

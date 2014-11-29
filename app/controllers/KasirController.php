@@ -27,10 +27,7 @@ class KasirController extends \BaseController
 
         $penjualan->save();
 
-        $totalHarga = 0;
-        foreach ($penjualan->detail as $detail) {
-            $totalHarga += $detail->unit * $detail->harga;
-        }
+        $totalHarga = $penjualan->grandTotal();
 
         if( Input::get('metode_pembayaran') == 'hutang' ) {
             $pelanggan = $penjualan->pelanggan();
@@ -39,7 +36,31 @@ class KasirController extends \BaseController
             $pelanggan->save();
         }
 
-        return Redirect::to('/penjualan/kasir');
+        $this->buatBarangTitipan($penjualan);
+
+        return Redirect::to('/kasir');
     }
 
+    private function buatBarangTitipan($penjualan)
+    {
+        $barangTitipan = new BarangTitipan();
+
+        $penjualan->barangTitipan()->save($barangTitipan);
+
+        $listBarangTitipan = $penjualan->detail;
+
+        $listDetail = [];
+
+        foreach ($listBarangTitipan as $detail) {
+            $barangTitipanDetail = new BarangTitipanDetail();
+
+            $barangTitipanDetail->id_barang = $detail->barang->id;
+            $barangTitipanDetail->unit = $detail->unit;
+
+            $listDetail[] = $barangTitipanDetail;
+
+        }
+
+        $barangTitipan->detail()->saveMany($listDetail);
+    }
 }

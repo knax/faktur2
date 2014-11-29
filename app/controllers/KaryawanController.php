@@ -29,14 +29,7 @@ class KaryawanController extends \BaseController
             $tanggal = DateTime::createFromFormat('Y-m-d', $tanggal);
         }
 
-        //                var_dump($tanggal);
-
-        //        $listKaryawan = Karyawan::whereHas('absen', function ($q) use ($tanggal) {
-        //            $q->where('tanggal', '=', $tanggal->format('Y-m-d'));
-        //        })->get();
         $listKaryawan = Karyawan::all();
-
-//        var_dump($listKaryawan);
 
         $formatter = new IntlDateFormatter('id_ID', IntlDateFormatter::FULL, IntlDateFormatter::FULL);
         $formatter->setPattern('EEEE, d MMMM yyyy');
@@ -80,6 +73,22 @@ class KaryawanController extends \BaseController
         return View::make('karyawan.lemburan.index')
                    ->with('listLemburan', $listLemburan)
                    ->with('tanggal', $formatter->format($hariIni));
+    }
+
+    public function buatKaryawanForm()
+    {
+        return View::make('karyawan.buat');
+    }
+
+    public function buatKaryawan()
+    {
+        $karyawan = new Karyawan();
+
+        $karyawan->nama = Input::get('nama_karyawan');
+
+        $karyawan->save();
+
+        return Redirect::route('karyawan.buat');
     }
 
 }
