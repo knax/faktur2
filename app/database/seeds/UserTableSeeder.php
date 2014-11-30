@@ -17,6 +17,13 @@ class UserTableSeeder extends Seeder
             'id_tipe_user' => '1'
         ]);
 
+        User::create([
+            'full_name'    => 'Topan',
+            'username'     => 'topan',
+            'password'     => Hash::make('standar'),
+            'id_tipe_user' => '1'
+        ]);
+
         foreach (range(1, 10) as $index) {
             User::create([
                 'full_name'    => $faker->name,
