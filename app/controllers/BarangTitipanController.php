@@ -67,18 +67,19 @@ class BarangTitipanController extends BaseController
 
     public function printSuratJalan($id)
     {
-        $penjualan = SuratJalan::findOrFail($id);
-
-        $url = URL::route('barang_titipan.surat_jalan.print.raw', ['id' => $id]);
-
-        $binary = '/home/knax/PhpstormProjects/faktur2/vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64';
-
-        $snappy = new Knp\Snappy\Pdf($binary);
-        $response = Response::make($snappy->getOutput($url));
-        $response->header('Content-Type', 'application/pdf');
+        return $this->printSuratJalanRaw($id);
+//        $penjualan = SuratJalan::findOrFail($id);
+//
+//        $url = URL::route('barang_titipan.surat_jalan.print.raw', ['id' => $id]);
+//
+//        $binary = base_path() . 'vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64';
+//
+//        $snappy = new Knp\Snappy\Pdf($binary);
+//        $response = Response::make($snappy->getOutput($url));
+//        $response->header('Content-Type', 'application/pdf');
 //        $response->header('Content-Disposition', 'attachment; filename="' . $penjualan->id . '.pdf"');
-
-        return $response;
+//
+//        return $response;
     }
 
 }

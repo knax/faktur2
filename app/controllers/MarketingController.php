@@ -67,17 +67,18 @@ class MarketingController extends \BaseController
     }
 
     public function printFaktur($id){
-        $penjualan = Penjualan::findOrFail($id);
-
-        $url = URL::route('marketing.print.raw', ['id' => $id]);
-
-        $binary = '/home/knax/PhpstormProjects/faktur2/vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64';
-
-        $snappy = new Knp\Snappy\Pdf($binary);
-        $snappy->setOption('margin-top', '2mm');
-        $response = Response::make($snappy->getOutput($url));
-        $response->header('Content-Type', 'application/pdf');
-//        $response->header('Content-Disposition', 'attachment; filename="' . $penjualan->id . '.pdf"');
-        return $response;
+        return $this->printRaw($id);
+//        $penjualan = Penjualan::findOrFail($id);
+//
+//        $url = URL::route('marketing.print.raw', ['id' => $id]);
+//
+//        $binary = base_path() . 'vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64';
+//
+//        $snappy = new Knp\Snappy\Pdf($binary);
+//        $snappy->setOption('margin-top', '2mm');
+//        $response = Response::make($snappy->getOutput($url));
+//        $response->header('Content-Type', 'application/pdf');
+////        $response->header('Content-Disposition', 'attachment; filename="' . $penjualan->id . '.pdf"');
+//        return $response;
     }
 }
